@@ -1,33 +1,68 @@
-.App {
-  text-align: center;
-}
+* {box-sizing: border-box}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.nav-item{
+  padding: 10px;
+  cursor: pointer;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-list{
+  list-style-type: none;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  border: 1px solid black;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+}
+.search-trip-container{
+  display: flex;
+  justify-content: center;
+}
+.date-label{
+  display: block;
+}
+.date-picker-container {
+  display: flex;
+  justify-content: space-between;
+}
+.date-picker{
+  width: 45%;
+}
+.search-button-container{
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-end;
 }
 
-.App-link {
-  color: #61dafb;
+.select-to{
+  margin-top: 5px;
+  height: 21px;
+  width: 100%;
+}
+.from-input{
+  width: 100%;
+  height: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.from-to-container{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.date-picker-input{
+  width: 100%;
+}
+
+@media(min-width: 480px){
+  .select-to{
+    width: 45%;
+    margin-top: 0px;
   }
-  to {
-    transform: rotate(360deg);
+  .from-input{
+    width: 45%;
+  }
+  .nav-list{
+    flex-direction: row;
+  }
+  .from-to-container{
+    flex-direction: row;
   }
 }
