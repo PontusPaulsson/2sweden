@@ -7,11 +7,14 @@ export class SearchTrip extends Component {
         super(props);
         this.state = {
             from: "",
-            to: "",
+            to: "Stockholm",
             startDate: new Date(),
             endDate: new Date()
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChangeFrom = this.onChangeFrom.bind(this);
+        this.onChangeTo = this.onChangeTo.bind(this);
     }
 
     handleChange(date, type) {
@@ -20,14 +23,27 @@ export class SearchTrip extends Component {
         });
     }
 
+    onChangeTo(event){
+        this.setState({to: event.target.value});
+    }
+
+    onChangeFrom(event){
+        this.setState({from: event.target.value});
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        this.props.doSearch(this.state.from, this.state.to, this.state.startDate, this.state.endDate);
+    }
+
     render() {
         const options = ['Stockholm', 'Åre', 'Falun'];
         return (
             <div className="search-trip-container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="from-to-container">
-                        <input type="text" placeholder="From" className="from-input" value={this.state.from}/>
-                        <select className="select-to">{options.map(option => <option>{option}</option>)}</select>
+                        <input onChange={this.onChangeFrom} type="text" placeholder="From" className="from-input" value={this.state.from}/>
+                        <select className="select-to" onChange={this.onChangeTo}>{options.map(option => <option>{option}</option>)}</select>
                     </div>
                     <div className="date-picker-container">
                         <div className="date-picker">
