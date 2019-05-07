@@ -12,18 +12,28 @@ class App extends Component {
     super(props);
 
     this.state = {
+      data: [],
       showResult: false
     };
   }
 
   //TODO - Gör en sökning mot rome2rio - uppdatera state i denna component och skicka med det till <SearchTrip/> för att rendera ut det i HTML.
   doSearch = (from, to, startDate, endDate) => {
-    fetch(`${base}Search?key=${apiKey}&oName=${from}&dName=${to}`)
-      .then(response => response.json())
-      .then(data => console.log({ data }));
-
-    console.log(from, to, startDate, endDate);
-    this.setState({ showResult: true });
+    if (from) {
+      fetch(`${base}Search?key=${apiKey}&oName=${from}&dName=${to}`)
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            data: data,
+            showResult: true
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ showResult: false });
+        });
+      console.log(from, to, startDate, endDate);
+    }
   };
 
   render() {
@@ -31,7 +41,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         {this.state.showResult ? (
-          <SearchResult />
+          <SearchResult data={this.state.data} />
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}
