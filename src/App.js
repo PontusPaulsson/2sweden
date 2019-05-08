@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      data: [],
+      routes: [],
       showResult: false
     };
   }
@@ -24,7 +24,7 @@ class App extends Component {
         .then(response => response.json())
         .then(data => {
           this.setState({
-            data: data,
+            routes: data.routes,
             showResult: true
           });
         })
@@ -41,7 +41,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         {this.state.showResult ? (
-          <SearchResult data={this.state.data} />
+          <SearchResult routes={this.state.routes} />
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}
