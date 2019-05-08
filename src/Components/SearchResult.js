@@ -6,14 +6,28 @@ import "react-table/react-table.css";
 export class SearchResult extends Component {
   constructor(props) {
     super(props);
-    this.state = [
-      {
-        transport: "",
-        time: "",
-        price: ""
-      }
-    ];
+    this.state = {
+      tableData: []
+    };
   }
+
+  generateTableData = routes => {
+    let newData = [];
+    routes.map(route => {
+      let newObject = {
+        transport: route.name,
+        time: route.totalDuration,
+        price: route.indicativePrices[0].price
+      };
+      newData.push(newObject);
+    });
+    this.setState({ tableData: newData });
+  };
+
+  componentDidMount() {
+    this.generateTableData(this.props.routes);
+  }
+
   render() {
     const data = [
       {
@@ -40,7 +54,11 @@ export class SearchResult extends Component {
     ];
 
     return (
-      <ReactTable className="result-table" data={data} columns={columns} />
+      <ReactTable
+        className="result-table"
+        data={this.state.tableData}
+        columns={columns}
+      />
     );
   }
 }
