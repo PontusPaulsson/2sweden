@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-//TODO Skicka in data till props och rendera ut detta i HTML.
 export class SearchResult extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +14,7 @@ export class SearchResult extends Component {
   timeConvert = (num) => {
     var hours = Math.floor(num / 60);
     var minutes = num % 60;
-    return hours + "h" + minutes + "m";
+    return hours + "h " + minutes + "m";
   }
 
   generateTableData = routes => {
@@ -24,9 +23,9 @@ export class SearchResult extends Component {
       let newObject = {
         transport: route.name,
         time: this.timeConvert(route.totalDuration),
-        price: route.indicativePrices[0].price + ' SEK'
+        price: route.indicativePrices[0].price,
       };
-      newData.push(newObject);
+      return newData.push(newObject);
     });
     this.setState({ tableData: newData });
   };
@@ -56,19 +55,18 @@ export class SearchResult extends Component {
       },
       {
         accessor: "price", // Required because our accessor is not a string
-        Header: "Pris"
+        Header: "Pris (SEK)"
       }
     ];
 
     return (
-      <ReactTable
-        className="result-table"
-        data={this.state.tableData}
-        columns={columns}
-        showPagination={false}
-        defaultPageSize={this.props.routes.length}
-        getTrProps={onRowClick}
-      />
+      <ReactTable className="result-table"
+      data={this.state.tableData}
+      columns={columns}
+      showPagination={false}
+      defaultPageSize={this.props.routes.length}
+      getTrProps={onRowClick}>
+        </ReactTable>
     );
   }
 }

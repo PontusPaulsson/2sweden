@@ -54,9 +54,9 @@ export class SearchTrip extends Component {
               className="from-input"
               value={this.state.from}
             />
-            <select className="select-to" onChange={this.onChangeTo}>
+            <select className="select-to" onChange={this.onChangeTo} >
               {options.map(option => (
-                <option>{option}</option>
+                <option key={option}> {option}</option>
               ))}
             </select>
           </div>
@@ -82,7 +82,7 @@ export class SearchTrip extends Component {
               />
             </div>
           </div>
-          <a href="">See the olympic schedule</a>
+          {/*<a href="">See the olympic schedule</a>*/}
           <div className="search-button-container">
             <button>Sök</button>
           </div>
