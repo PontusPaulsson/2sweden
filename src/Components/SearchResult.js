@@ -15,8 +15,8 @@ export default class SearchResult extends Component {
   }
 
   timeConvert = num => {
-    var hours = Math.floor(num / 60);
-    var minutes = num % 60;
+    let hours = Math.floor(num / 60);
+    let minutes = num % 60;
     return hours + "h " + minutes + "m";
   };
 
@@ -66,39 +66,39 @@ export default class SearchResult extends Component {
     };
     const resultColumns = [
       {
-        Header: "Färdmedel",
+        Header: "Transport",
         accessor: "transport" // String-based value accessors!
       },
       {
-        Header: "Tid",
+        Header: "Time",
         accessor: "time"
         // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
       },
       {
         accessor: "price", // Required because our accessor is not a string
-        Header: "Pris (SEK)"
+        Header: "Price (SEK)"
       },
       {
         accessor: "transfers", // Required because our accessor is not a string
-        Header: "Byten"
+        Header: "Transfers"
       }
     ];
 
     const segmentColumns = [
       {
-        Header: "Färdmedel",
+        Header: "Transport",
         accessor: "transport" // String-based value accessors!
       },
       {
-        Header: "Från",
+        Header: "From",
         accessor: "from" // String-based value accessors!
       },
       {
-        Header: "Till",
+        Header: "To",
         accessor: "to" // String-based value accessors!
       },
       {
-        Header: "Tid",
+        Header: "Time",
         accessor: "time" // String-based value accessors!
       }
     ];
@@ -118,7 +118,7 @@ export default class SearchResult extends Component {
             data={this.state.segmentData}
             showPagination={false}
             columns={segmentColumns}
-            defaultPageSize={5}
+            pageSize={this.state.segmentTableLength}
           />
         ) : null}
       </div>
