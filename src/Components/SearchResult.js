@@ -7,8 +7,15 @@ export class SearchResult extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableData: []
+      tableData: [],
+      selected: null
     };
+  }
+
+  timeConvert = (num) => {
+    var hours = Math.floor(num / 60);
+    var minutes = num % 60;
+    return hours + "h" + minutes + "m";
   }
 
   generateTableData = routes => {
@@ -16,8 +23,8 @@ export class SearchResult extends Component {
     routes.map(route => {
       let newObject = {
         transport: route.name,
-        time: route.totalDuration,
-        price: route.indicativePrices[0].price
+        time: this.timeConvert(route.totalDuration),
+        price: route.indicativePrices[0].price + ' SEK'
       };
       newData.push(newObject);
     });
@@ -29,13 +36,13 @@ export class SearchResult extends Component {
   }
 
   render() {
-    const data = [
-      {
-        transport: "",
-        time: "",
-        price: ""
+    const onRowClick = (state, rowInfo) => {
+      return {
+        onClick: e => {
+          console.log('It was in this row:', rowInfo)
+        }
       }
-    ];
+    };
 
     const columns = [
       {
@@ -58,6 +65,9 @@ export class SearchResult extends Component {
         className="result-table"
         data={this.state.tableData}
         columns={columns}
+        showPagination={false}
+        defaultPageSize={this.props.routes.length}
+        getTrProps={onRowClick}
       />
     );
   }
