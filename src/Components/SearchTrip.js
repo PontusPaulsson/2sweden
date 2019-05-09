@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export class SearchTrip extends Component {
+export default class SearchTrip extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +44,7 @@ export class SearchTrip extends Component {
   render() {
     const options = ["Stockholm", "Åre", "Falun"];
     return (
-      <div className="search-trip-container">
+      <div className="search-trip-container" data-test="search-trip-container">
         <form onSubmit={this.handleSubmit}>
           <div className="from-to-container">
             <input

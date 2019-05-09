@@ -1,8 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import SearchTrip from '../Components/SearchTrip.js'
-import "should"
-import "should-enzyme"
 
 describe('SearchTrip component', () => {
     it('Should render one Search', () => {
