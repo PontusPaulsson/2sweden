@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-export class SearchResult extends Component {
+export default class SearchResult extends Component {
     constructor(props) {
         super(props);
         this.state = {
