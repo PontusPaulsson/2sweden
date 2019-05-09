@@ -5,8 +5,8 @@ export const Navbar = () => {
     return(
         <nav>
             <ul className="nav-list">
-                {links.map(link => <li className='nav-item'>{link}</li>)}
+                {links.map(link => <li className='nav-item' key={link}>{link}</li>)}
             </ul>
         </nav>
     )
-};
+}
