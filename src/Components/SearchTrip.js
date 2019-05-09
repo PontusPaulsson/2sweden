@@ -91,3 +91,4 @@ export default class SearchTrip extends Component {
     );
   }
 }
+

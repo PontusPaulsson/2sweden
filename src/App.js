@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import { Navbar } from "./Components/Navbar";
-import { SearchTrip } from "./Components/SearchTrip";
-import { SearchResult } from "./Components/SearchResult";
+import SearchTrip from "./Components/SearchTrip";
+import SearchResult from "./Components/SearchResult";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
