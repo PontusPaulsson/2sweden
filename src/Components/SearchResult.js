@@ -8,7 +8,8 @@ export class SearchResult extends Component {
         this.state = {
             tableData: [],
             segmentData: [],
-            selected: null
+            selected: null,
+            segmentTableToggle: false,
         };
     }
 
@@ -33,7 +34,6 @@ export class SearchResult extends Component {
 
     generateSegmentTableData = (route) => {
         let segments = [];
-        console.log(this.props.places);
         route.segments.map(segment => {
             let newSegment = {
                 transport: this.props.vehicles[segment.vehicle].name,
@@ -41,7 +41,7 @@ export class SearchResult extends Component {
                 to: this.props.places[segment.arrPlace].shortName,
                 time: this.timeConvert(segment.transitDuration)
             };
-            segments.push(newSegment);
+           return segments.push(newSegment);
         });
         this.setState({segmentData: segments})
     };
@@ -55,6 +55,7 @@ export class SearchResult extends Component {
             return {
                 onClick: e => {
                     this.generateSegmentTableData(this.props.routes[rowInfo.index]);
+                    this.setState({segmentTableToggle: true})
                 }
             }
         };
@@ -105,11 +106,16 @@ export class SearchResult extends Component {
                     defaultPageSize={this.props.routes.length}
                     getTrProps={onRowClick}
                 />
-                <ReactTable
-                    className="result-table"
-                    data={this.state.segmentData}
-                    columns={segmentColumns}
-                />
+                {this.state.segmentTableToggle ? (
+                    <ReactTable
+                        className="result-table"
+                        data={this.state.segmentData}
+                        columns={segmentColumns}
+                    />
+                ) : (
+                    null
+                )}
+
             </div>
         );
     }
