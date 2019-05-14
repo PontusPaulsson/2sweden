@@ -55,8 +55,9 @@ body {
 .nav-list {
   list-style-type: none;
   display: flex;
+  justify-content: space-evenly;
   border: 1.5px solid black;
-  justify-content: center;
+
   flex-direction: column;
   background-color: #006699;
   color: #ffcc00;
@@ -64,19 +65,26 @@ body {
   font-size: 15px;
 }
 .title-container {
+  padding-top: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   color: #006699;
   font-weight: bold;
-  font-size: 150%;
+  margin-top: auto;
+}
+.title-container h1 {
+  margin: 0;
+  font-size: 50px;
 }
 .Logo {
-  margin-top: auto;
-  margin-bottom: auto;
   margin-right: 10px;
-  max-width: 100px;
-  max-height: 100px;
+  max-width: 70px;
+  max-height: 70px;
   border-radius: 100%;
+  margin-left: 10px;
+}
+.invis-margin {
+  margin-right: 90px;
 }
 
 @media (min-width: 480px) {
