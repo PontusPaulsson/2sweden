@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+}
+
+.result-table {
+  max-width: 40%;
+  background-color: #006699;
+  color: #ffcc00;
+  font-size: 20px;
+  font-weight: bold;
+  border: 20px solid #006699;
+  border-radius: 10px;
+  text-align: center;
+  margin: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 0 1.5px black;
+}
+body {
+  background-color: #ffcc00;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.nav-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.Stockholm {
+  width: 33%;
+
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.Are {
+  width: 33%;
+  border-radius: 10px;
+}
+.Falun {
+  width: 33%;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.img-inspiration {
+  display: flex;
+  justify-content: center;
+  border: 10px solid #006699;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1.5px black;
+  background-color: #006699;
+}
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  border: 1.5px solid black;
+
+  flex-direction: column;
+  background-color: #006699;
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 15px;
+}
+.title-container {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  color: #006699;
+  font-weight: bold;
+  margin-top: auto;
+}
+.title-container h1 {
+  margin: 0;
+  font-size: 50px;
+}
+.Logo {
+  margin-right: 10px;
+  max-width: 70px;
+  max-height: 70px;
+  border-radius: 100%;
+  margin-left: 10px;
+}
+.invis-margin {
+  margin-right: 90px;
+}
+
+@media (min-width: 480px) {
+  .select-to {
+    width: 45%;
+    margin-top: 0px;
+  }
+  .from-input {
+    width: 45%;
+  }
+  .nav-list {
+    flex-direction: row;
+  }
+  .from-to-container {
+    flex-direction: row;
+  }
+}
