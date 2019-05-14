@@ -19,7 +19,7 @@ class App extends Component {
           places: [],
           tableData: [],
           showResult: false,
-          currencyCode: ""'
+          currencyCode: ""
         };
     }
   
@@ -32,26 +32,28 @@ class App extends Component {
   };
 
   doSearch = (from, to) => {
-    if (from) {
-      fetch(
-        `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
-          this.state.currencyCode
-        }`
-      )
-        .then(response => response.json())
-        .then(data => {
-          this.setState({
-            routes: data.routes,
-            vehicles: data.vehicles,
-            places: data.places,
-            showResult: true
-          });
-          this.generateTableData(this.state.routes);
-        })
-        .catch(error => {
-          console.log(error);
-          this.setState({ showResult: false });
-        });
+      if (from) {
+          fetch(
+              `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
+                  this.state.currencyCode
+                  }`
+          )
+              .then(response => response.json())
+              .then(data => {
+                  this.setState({
+                      routes: data.routes,
+                      vehicles: data.vehicles,
+                      places: data.places,
+                      showResult: true
+                  });
+                  this.generateTableData(this.state.routes);
+              })
+              .catch(error => {
+                  console.log(error);
+                  this.setState({showResult: false});
+              });
+      }
+  }
       
     componentWillMount() {
         this.getLocalCurrencyCode();
