@@ -13,13 +13,7 @@ export default class SearchResult extends Component {
       segmentTableLength: 0
     };
   }
-
-  timeConvert = num => {
-    let hours = Math.floor(num / 60);
-    let minutes = num % 60;
-    return hours + "h " + minutes + "m";
-  };
-
+  /*
   generateTableData = routes => {
     let newData = [];
     routes.map(route => {
@@ -32,6 +26,12 @@ export default class SearchResult extends Component {
       return newData.push(newObject);
     });
     this.setState({ tableData: newData });
+  };
+*/
+  timeConvert = num => {
+    let hours = Math.floor(num / 60);
+    let minutes = num % 60;
+    return hours + "h " + minutes + "m";
   };
 
   generateSegmentTableData = route => {
@@ -50,11 +50,11 @@ export default class SearchResult extends Component {
       segmentTableLength: segments.length
     });
   };
-
+/*
   componentDidMount() {
-    this.generateTableData(this.props.routes);
+    //this.generateTableData(this.props.routes);
   }
-
+*/
   render() {
     const onRowClick = (state, rowInfo) => {
       return {
@@ -106,7 +106,7 @@ export default class SearchResult extends Component {
       <div>
         <ReactTable
           className="result-table"
-          data={this.state.tableData}
+          data={this.props.tableData}
           columns={resultColumns}
           showPagination={false}
           defaultPageSize={this.props.routes.length}

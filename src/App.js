@@ -18,6 +18,7 @@ class App extends Component {
       routes: [],
       vehicles: [],
       places: [],
+      tableData: [],
       showResult: false,
       currencyCode: ""
     };
@@ -46,6 +47,7 @@ class App extends Component {
             places: data.places,
             showResult: true
           });
+          this.generateTableData(this.state.routes);
         })
         .catch(error => {
           console.log(error);
@@ -54,9 +56,30 @@ class App extends Component {
     }
   };
 
+
+  timeConvert = num => {
+    let hours = Math.floor(num / 60);
+    let minutes = num % 60;
+    return hours + "h " + minutes + "m";
+  };
+
   componentWillMount() {
     this.getLocalCurrencyCode();
   }
+
+  generateTableData = routes => {
+    let newData = [];
+    routes.map(route => {
+      let newObject = {
+        transport: route.name,
+        time: this.timeConvert(route.totalDuration),
+        price: route.indicativePrices[0].price,
+        transfers: route.segments.length - 1
+      };
+      return newData.push(newObject);
+    });
+    this.setState({ tableData: newData });
+  };
 
   render() {
     return (
@@ -74,6 +97,7 @@ class App extends Component {
             routes={this.state.routes}
             vehicles={this.state.vehicles}
             places={this.state.places}
+            tableData={this.state.tableData}
           />
         ) : (
           <SearchTrip doSearch={this.doSearch} />
