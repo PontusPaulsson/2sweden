@@ -1,0 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+.result-table {
+  max-width: 40%;
+  background-color: #006699;
+  color: #ffcc00;
+  font-size: 20px;
+  font-weight: bold;
+  border: 20px solid #006699;
+  border-radius: 10px;
+  text-align: center;
+  margin: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 0 1.5px black;
+}
+body {
+  background-color: #ffcc00;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.nav-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.Stockholm {
+  width: stretch;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+.Are {
+  width: stretch;
+  border-radius: 10px;
+}
+.Falun {
+  width: stretch;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.search {
+  height: 30px;
+  width: 300px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+.input {
+  border-radius: 3px;
+  height: 30px;
+  width: stretch;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.img-inspiration {
+  display: flex;
+  justify-content: center;
+  border: 10px solid #006699;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1.5px black;
+  background-color: #006699;
+}
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  border: 1.5px solid black;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #006699;
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 15px;
+}
+.title {
+  text-align: center;
+  color: #006699;
+  font-weight: bold;
+  font-size: 250%;
+}
+@media (min-width: 480px) {
+  .select-to {
+    width: 45%;
+    margin-top: 0px;
+  }
+  .from-input {
+    width: 45%;
+  }
+  .nav-list {
+    flex-direction: row;
+  }
+  .from-to-container {
+    flex-direction: row;
+  }
+}

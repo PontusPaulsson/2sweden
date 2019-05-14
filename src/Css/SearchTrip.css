@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+.search-trip-container {
+  border: 15px solid #006699;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #006699;
+  color: #ffcc00;
+  font-weight: bold;
+  max-width: 750px;
+  margin: auto;
+  box-shadow: 0 0 0 1.5px black;
+  margin-top: 20px;
+}
+.from-to-container {
+  display: flex;
+  justify-content: space-between;
+}

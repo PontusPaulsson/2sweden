@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./Css/App.css";
+import "./Css/SearchTrip.css";
+import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
+import { Inspiration } from "./Components/Inspiration";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
 
@@ -15,14 +18,26 @@ class App extends Component {
       routes: [],
       vehicles: [],
       places: [],
-      showResult: false
+      showResult: false,
+      currencyCode: ""
     };
   }
 
-  doSearch = (from, to, startDate, endDate) => {
-    const currencyCode = "SEK";
+  getLocalCurrencyCode = () => {
+    fetch(`http://www.geoplugin.net/json.gp`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ currencyCode: data.geoplugin_currencyCode });
+      });
+  };
+
+  doSearch = (from, to) => {
     if (from) {
-      fetch(`${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${currencyCode}`)
+      fetch(
+        `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
+          this.state.currencyCode
+        }`
+      )
         .then(response => response.json())
         .then(data => {
           this.setState({
@@ -39,12 +54,27 @@ class App extends Component {
     }
   };
 
+  componentWillMount() {
+    this.getLocalCurrencyCode();
+  }
+
   render() {
     return (
       <div className="App">
+        <Title />
         <Navbar />
         {this.state.showResult ? (
-          <SearchResult routes={this.state.routes} vehicles={this.state.vehicles} places={this.state.places} />
+          <SearchTrip doSearch={this.doSearch} />
+        ) : (
+          <Inspiration />
+        )}
+
+        {this.state.showResult ? (
+          <SearchResult
+            routes={this.state.routes}
+            vehicles={this.state.vehicles}
+            places={this.state.places}
+          />
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}
