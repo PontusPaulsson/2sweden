@@ -5,13 +5,11 @@ import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
 
 const apiKey = process.env.REACT_APP_API_KEY;
-const googleApiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
 
 class App extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             routes: [],
             vehicles: [],

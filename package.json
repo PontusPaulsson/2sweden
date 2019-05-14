@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "decode-google-map-polyline": "^1.0.1",
     "dotenv": "^8.0.0",
     "react": "^16.8.6",
     "react-datepicker": "^2.5.0",
     "react-dom": "^16.8.6",
+    "react-google-maps": "^9.4.5",
     "react-scripts": "3.0.0",
     "react-table": "^6.10.0"
   },
