@@ -11,19 +11,18 @@ const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      routes: [],
-      vehicles: [],
-      places: [],
-      tableData: [],
-      showResult: false,
-      currencyCode: ""
-    };
-  }
-
+    constructor(props) {
+        super(props);
+        this.state = {
+          routes: [],
+          vehicles: [],
+          places: [],
+          tableData: [],
+          showResult: false,
+          currencyCode: ""'
+        };
+    }
+  
   getLocalCurrencyCode = () => {
     fetch(`http://www.geoplugin.net/json.gp`)
       .then(response => response.json())
@@ -53,9 +52,10 @@ class App extends Component {
           console.log(error);
           this.setState({ showResult: false });
         });
+      
+    componentWillMount() {
+        this.getLocalCurrencyCode();
     }
-  };
-
 
   timeConvert = num => {
     let hours = Math.floor(num / 60);
@@ -63,9 +63,6 @@ class App extends Component {
     return hours + "h " + minutes + "m";
   };
 
-  componentWillMount() {
-    this.getLocalCurrencyCode();
-  }
 
   generateTableData = routes => {
     let newData = [];

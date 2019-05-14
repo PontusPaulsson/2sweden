@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
@@ -13,21 +13,6 @@ export default class SearchResult extends Component {
       segmentTableLength: 0
     };
   }
-  /*
-  generateTableData = routes => {
-    let newData = [];
-    routes.map(route => {
-      let newObject = {
-        transport: route.name,
-        time: this.timeConvert(route.totalDuration),
-        price: route.indicativePrices[0].price,
-        transfers: route.segments.length - 1
-      };
-      return newData.push(newObject);
-    });
-    this.setState({ tableData: newData });
-  };
-*/
   timeConvert = num => {
     let hours = Math.floor(num / 60);
     let minutes = num % 60;
@@ -50,11 +35,6 @@ export default class SearchResult extends Component {
       segmentTableLength: segments.length
     });
   };
-/*
-  componentDidMount() {
-    //this.generateTableData(this.props.routes);
-  }
-*/
   render() {
     const onRowClick = (state, rowInfo) => {
       return {
@@ -124,4 +104,4 @@ export default class SearchResult extends Component {
       </div>
     );
   }
-}
+}  
