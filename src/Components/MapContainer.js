@@ -11,29 +11,42 @@ class MapContainer extends Component {
     render() {
         const decodePolyline = require('decode-google-map-polyline');
 
-        var oslo = {lat: 59.91273, lng: 10.74609}; // Hardcoded stuffs for some nice output
-        var sthml = {lat: 59.33258, lng: 18.0649};
-        var array = [];
-        array.push(oslo);
-        array.push(sthml);
-        console.log(this.props.children)
+        let array = [];
+        for (let i = 0; i < this.props.children.length; i++) {
+            if (this.props.children[i].path === undefined) {
+                array.push("Flyg");
+            } else {
+                array.push(decodePolyline(this.props.children[i].path))
+            }
+        }
+
+        let pathMapping = array.map((path => {
+            return (
+                <Polyline path={path}/>
+            )
+        }));
+
+        let markerMapping = array.map((marker => {
+            return (
+                <Marker place={{lat: array[0][0].lat, lng: array[0][0].lng}} visible={true}/>
+            )
+        }));
+
         const MapWithAMarker = withScriptjs(withGoogleMap(props =>
             <GoogleMap
                 defaultZoom={5}
-                defaultCenter={{lat: array[0].lat, lng: array[0].lng}}
+                defaultCenter={{lat: array[0][0].lat, lng: array[0][0].lng}}
             >
-                <Polyline path={array}
-                          visible={true}
-                />
+                <Marker position={{lat: array[0][0].lat, lng: array[0][0].lng}} visible={true}/>
+                {pathMapping}
 
             </GoogleMap>
         ));
-        const url = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
         return (
             <MapWithAMarker
-                googleMapURL={url}
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`}
                 loadingElement={<div style={{height: `100%`}}/>}
-                containerElement={<div style={{height: `400px`}}/>}
+                containerElement={<div style={{height: `100%`}}/>}
                 mapElement={<div style={{height: `100%`}}/>}
             />
         )
