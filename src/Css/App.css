@@ -1,25 +1,14 @@
+@import url("https://fonts.googleapis.com/css?family=Lato|Raleway");
 * {
   box-sizing: border-box;
 }
 
-.result-table {
-  max-width: 40%;
-  background-color: #006699;
-  color: #ffcc00;
-  font-size: 20px;
-  font-weight: bold;
-  border: 20px solid #006699;
-  border-radius: 10px;
-  text-align: center;
-  margin: left;
-  margin-left: 10px;
-  margin-top: 10px;
-  box-shadow: 0 0 0 1.5px black;
-}
 body {
   background-color: #ffcc00;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: Lato;
 }
+
 .nav-item {
   padding: 10px;
   cursor: pointer;
@@ -27,7 +16,6 @@ body {
 
 .Stockholm {
   width: 33%;
-
   border-radius: 10px;
   margin-right: 10px;
 }
@@ -52,6 +40,7 @@ body {
   box-shadow: 0 0 0 1.5px black;
   background-color: #006699;
 }
+
 .nav-list {
   list-style-type: none;
   display: flex;
@@ -73,6 +62,7 @@ body {
   margin-top: auto;
 }
 .title-container h1 {
+  font-family: Raleway;
   margin: 0;
   font-size: 50px;
 }

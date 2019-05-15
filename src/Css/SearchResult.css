@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+}
+
+.result-table {
+  max-width: 100%;
+  background-color: #006699;
+  color: #ffcc00;
+  font-size: 20px;
+  font-weight: bold;
+  border: 20px solid #006699;
+  border-radius: 10px;
+  text-align: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  box-shadow: 0 0 0 1.5px black;
+  max-height: 300px;
+  margin-bottom: 10px;
+}
+.result-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.map-container {
+  display: flex;
+  flex-direction: column;
+}
+.map {
+  width: 100%;
+  height: bottom;
+  border-radius: 10px;
+  box-shadow: 0 0 0 1.5px black;
+  overflow: hidden;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
