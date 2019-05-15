@@ -11,18 +11,12 @@ class MapContainer extends Component {
     render() {
         const decodePolyline = require('decode-google-map-polyline');
 
-        var oslo = {lat: 59.91273, lng: 10.74609};
+        var oslo = {lat: 59.91273, lng: 10.74609}; // Hardcoded stuffs for some nice output
         var sthml = {lat: 59.33258, lng: 18.0649};
         var array = [];
         array.push(oslo);
         array.push(sthml);
-
-        // path: segment.path, adda i newSegment array.
-
-        // adda ny vid linje 124 i SearchResult.js {this.state.segmentTableToggle ? (
-        //                     <MapContainer children={this.state.segmentData}/>
-        //                 ) : null}
-
+        console.log(this.props.children)
         const MapWithAMarker = withScriptjs(withGoogleMap(props =>
             <GoogleMap
                 defaultZoom={5}
