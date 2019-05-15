@@ -1,15 +1,16 @@
-import React from 'react';
-import {Component} from 'react';
+import React from "react";
+import { Component } from "react";
 import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker, Polyline,
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+  Polyline
 } from "react-google-maps";
 
 class MapContainer extends Component {
-    render() {
-        const decodePolyline = require('decode-google-map-polyline');
+  render() {
+    const decodePolyline = require("decode-google-map-polyline");
 
         let array = [];
         for (let i = 0; i < this.props.children.length; i++) {
