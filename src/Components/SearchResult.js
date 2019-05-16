@@ -93,7 +93,7 @@ export default class SearchResult extends Component {
                     },
                     style: {
                         background:
-                            rowInfo.index === this.state.rowEdit ? "#00afec" : "#006699",
+                            rowInfo.index === this.state.rowEdit ? "#ffcc00" : "#006699",
                         color:
                             rowInfo.index === this.state.rowEdit ? "#006699" : "#ffcc00"
                     }

@@ -39,3 +39,17 @@
   background-color: white;
   text-shadow: -0vh 0 black, 0 0vh black, 0vh 0 black, 0 -0vh black;
 }
+.ReactTable .rt-tr .action {
+  transition: all .2s ease;
+  text-align: center;
+  transform: scale(0)
+}
+
+.ReactTable .rt-tr:hover .action {
+  transform: scale(1.3)
+}
+
+.ReactTable .rt-tr:hover .rt-td {
+  background-color: #ffcc00;
+  color: #006699;
+}
