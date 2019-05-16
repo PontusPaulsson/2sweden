@@ -10,6 +10,7 @@ import {
 
 class MapContainer extends Component {
     render() {
+
         const decodePolyline = require("decode-google-map-polyline");
         console.log(this.props.children)
         let pathMapping = this.props.children.map((array => {
