@@ -2,35 +2,35 @@
   box-sizing: border-box;
 }
 .search-trip-container {
-  border: 10px solid #006699;
-  border-radius: 10px;
+  border: 1.5vh solid #006699;
+  border-radius: 1.5vh;
   display: flex;
   flex-direction: column;
   background-color: #006699;
   color: #ffcc00;
   font-weight: bold;
-  max-width: 1000px;
+  max-width: 75vw;
   margin: auto;
-  box-shadow: 0 0 0 1.5px black;
-  margin-top: 20px;
+  box-shadow: 0 0 0 0.3vh black;
+  margin-top: 3vh;
 }
 .from-to-container {
   display: flex;
   justify-content: space-between;
 }
 .input {
-  border-radius: 3px;
-  height: 35px;
+  border-radius: 1vh;
+  height: 6vh;
   width: stretch;
-  margin-left: 5px;
-  margin-right: 5px;
-  font-size: 16px;
+  margin-left: 0.4vw;
+  margin-right: 0.4vw;
+  font-size: 3vh;
 }
 .search {
-  height: 35px;
-  width: 300px;
-  margin-left: 5px;
-  margin-right: 5px;
-  border-radius: 3px;
-  font-size: 16px;
+  height: 6vh;
+  width: 25vw;
+  margin-left: 0.4vw;
+  margin-right: 0.4vw;
+  border-radius: 1vh;
+  font-size: 3vh;
 }
