@@ -6,34 +6,36 @@
   max-width: 100%;
   background-color: #006699;
   color: #ffcc00;
-  font-size: 20px;
+  font-size: 2.7vh;
   font-weight: bold;
-  border: 20px solid #006699;
-  border-radius: 10px;
+  border: 3vh solid #006699;
+  border-radius: 1.5vh;
   text-align: center;
-  margin-right: 10px;
-  margin-left: 10px;
-  box-shadow: 0 0 0 1.5px black;
-  margin-bottom: 10px;
+  margin-right: 0.8vw;
+  margin-left: 0.8vw;
+  box-shadow: 0 0 0 0.3vh black;
+  margin-bottom: 1.5vh;
+  flex-grow: 1;
 }
+
 .result-container {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 1.5vh;
+  min-height: 62.7vh;
 }
 .map-container {
   display: flex;
   flex-direction: column;
-  height: bottom;
-  width: 40%;
+  width: 60%;
 }
 .map {
   width: 100%;
-  height: bottom;
-  border-radius: 10px;
-  box-shadow: 0 0 0 1.5px black;
+  border-radius: 1.5vh;
+  box-shadow: 0 0 0 0.3vh black;
   overflow: hidden;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 0.8vw;
+  margin-bottom: 1.5vh;
   background-color: white;
+  text-shadow: -0vh 0 black, 0 0vh black, 0vh 0 black, 0 -0vh black;
 }
