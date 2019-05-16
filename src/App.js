@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./Css/App.css";
+import "./Css/SearchTrip.css";
+import "./Css/SearchResult.css";
+import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
+import { Inspiration } from "./Components/Inspiration";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
 
@@ -10,19 +14,31 @@ const base = `http://free.rome2rio.com/api/1.4/json/`;
 class App extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       routes: [],
       vehicles: [],
       places: [],
-      showResult: false
+      tableData: [],
+      showResult: false,
+      currencyCode: ""
     };
   }
 
-  doSearch = (from, to, startDate, endDate) => {
-    const currencyCode = "SEK";
+  getLocalCurrencyCode = () => {
+    fetch(`http://www.geoplugin.net/json.gp`)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ currencyCode: data.geoplugin_currencyCode });
+      });
+  };
+
+  doSearch = (from, to) => {
     if (from) {
-      fetch(`${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${currencyCode}`)
+      fetch(
+        `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
+          this.state.currencyCode
+        }`
+      )
         .then(response => response.json())
         .then(data => {
           this.setState({
@@ -31,6 +47,7 @@ class App extends Component {
             places: data.places,
             showResult: true
           });
+          this.generateTableData(this.state.routes);
         })
         .catch(error => {
           console.log(error);
@@ -39,12 +56,48 @@ class App extends Component {
     }
   };
 
+  componentWillMount() {
+    this.getLocalCurrencyCode();
+  }
+
+  timeConvert = num => {
+    let hours = Math.floor(num / 60);
+    let minutes = num % 60;
+    return hours + "h " + minutes + "m";
+  };
+
+  generateTableData = routes => {
+    let newData = [];
+    routes.map(route => {
+      let newObject = {
+        transport: route.name,
+        time: this.timeConvert(route.totalDuration),
+        price: route.indicativePrices[0].price,
+        transfers: route.segments.length - 1
+      };
+      return newData.push(newObject);
+    });
+    this.setState({ tableData: newData });
+  };
+
   render() {
     return (
       <div className="App">
+        <Title />
         <Navbar />
         {this.state.showResult ? (
-          <SearchResult routes={this.state.routes} vehicles={this.state.vehicles} places={this.state.places} />
+          <SearchTrip doSearch={this.doSearch} />
+        ) : (
+          <Inspiration />
+        )}
+
+        {this.state.showResult ? (
+          <SearchResult
+            routes={this.state.routes}
+            vehicles={this.state.vehicles}
+            places={this.state.places}
+            tableData={this.state.tableData}
+          />
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}

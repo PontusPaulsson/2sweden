@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+import MapContainer from "./MapContainer";
 
 export default class SearchResult extends Component {
   constructor(props) {
@@ -20,20 +21,6 @@ export default class SearchResult extends Component {
     return hours + "h " + minutes + "m";
   };
 
-  generateTableData = routes => {
-    let newData = [];
-    routes.map(route => {
-      let newObject = {
-        transport: route.name,
-        time: this.timeConvert(route.totalDuration),
-        price: route.indicativePrices[0].price,
-        transfers: route.segments.length - 1
-      };
-      return newData.push(newObject);
-    });
-    this.setState({ tableData: newData });
-  };
-
   generateSegmentTableData = route => {
     let segments = [];
     route.segments.map(segment => {
@@ -41,7 +28,8 @@ export default class SearchResult extends Component {
         transport: this.props.vehicles[segment.vehicle].name,
         from: this.props.places[segment.depPlace].shortName,
         to: this.props.places[segment.arrPlace].shortName,
-        time: this.timeConvert(segment.transitDuration)
+        time: this.timeConvert(segment.transitDuration),
+        path: segment.path
       };
       return segments.push(newSegment);
     });
@@ -50,10 +38,6 @@ export default class SearchResult extends Component {
       segmentTableLength: segments.length
     });
   };
-
-  componentDidMount() {
-    this.generateTableData(this.props.routes);
-  }
 
   render() {
     const onRowClick = (state, rowInfo) => {
@@ -103,24 +87,32 @@ export default class SearchResult extends Component {
       }
     ];
     return (
-      <div>
-        <ReactTable
-          className="result-table"
-          data={this.state.tableData}
-          columns={resultColumns}
-          showPagination={false}
-          defaultPageSize={this.props.routes.length}
-          getTrProps={onRowClick}
-        />
-        {this.state.segmentTableToggle ? (
+      <div className="result-container">
+        <div className="map-container">
           <ReactTable
             className="result-table"
-            data={this.state.segmentData}
+            data={this.props.tableData}
+            columns={resultColumns}
             showPagination={false}
-            columns={segmentColumns}
-            pageSize={this.state.segmentTableLength}
+            defaultPageSize={this.props.routes.length}
+            getTrProps={onRowClick}
           />
-        ) : null}
+
+          {this.state.segmentTableToggle ? (
+            <ReactTable
+              className="result-table"
+              data={this.state.segmentData}
+              showPagination={false}
+              columns={segmentColumns}
+              pageSize={this.state.segmentTableLength}
+            />
+          ) : null}
+        </div>
+        <div className="map">
+          {this.state.segmentTableToggle ? (
+            <MapContainer children={this.state.segmentData} />
+          ) : null}
+        </div>
       </div>
     );
   }
