@@ -1,44 +1,47 @@
 import React from "react";
-import { Component } from "react";
+import {Component} from "react";
 import {
-  withScriptjs,
-  withGoogleMap,
-  GoogleMap,
-  Marker,
-  Polyline
+    withScriptjs,
+    withGoogleMap,
+    GoogleMap,
+    Marker,
+    Polyline
 } from "react-google-maps";
 
 class MapContainer extends Component {
-  render() {
-    const decodePolyline = require("decode-google-map-polyline");
-
-        let array = [];
-        for (let i = 0; i < this.props.children.length; i++) {
-            if (this.props.children[i].path === undefined) {
-                array.push("Flyg");
+    render() {
+        const decodePolyline = require("decode-google-map-polyline");
+        console.log(this.props.children)
+        let pathMapping = this.props.children.map((array => {
+            var path = array.path;
+            if (path === undefined) {
+                let coordinates = [{
+                    lat: this.props.places[array.depPlace].lat,
+                    lng: this.props.places[array.depPlace].lng
+                }
+                    , {
+                        lat: this.props.places[array.arrPlace].lat,
+                        lng: this.props.places[array.arrPlace].lng
+                    }
+                ];
+                path = coordinates;
             } else {
-                array.push(decodePolyline(this.props.children[i].path))
+                path = decodePolyline(path);
             }
-        }
-
-        let pathMapping = array.map((path => {
             return (
-                <Polyline path={path}/>
-            )
-        }));
-
-        let markerMapping = array.map((marker => {
-            return (
-                <Marker place={{lat: array[0][0].lat, lng: array[0][0].lng}} visible={true}/>
+                <Polyline path={path}
+                          options={{strokeColor: array.strokeColor, strokeWeight: 3}}
+                          visible={true}
+                />
             )
         }));
 
         const MapWithAMarker = withScriptjs(withGoogleMap(props =>
             <GoogleMap
-                defaultZoom={5}
-                defaultCenter={{lat: array[0][0].lat, lng: array[0][0].lng}}
+                defaultZoom={2}
+                defaultCenter={{lat: 59.91273, lng: 10.74609}}
             >
-                <Marker position={{lat: array[0][0].lat, lng: array[0][0].lng}} visible={true}/>
+
                 {pathMapping}
 
             </GoogleMap>
