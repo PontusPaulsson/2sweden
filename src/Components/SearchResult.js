@@ -9,9 +9,15 @@ export default class SearchResult extends Component {
         this.state = {
             tableData: [],
             segmentData: [],
-            selected: null,
+            selected: -1,
             segmentTableToggle: false,
-            segmentTableLength: 0
+            segmentTableLength: 0,
+            selectionChanged: false,
+            rowEdit: false,
+            selectedRowIndex: 0,
+            test: true
+
+
         };
     }
 
@@ -60,15 +66,42 @@ export default class SearchResult extends Component {
 
     };
 
+    componentWillReceiveProps() {
+        this.generateSegmentTableData(this.props.routes[0]);
+    }
+
     render() {
         const onRowClick = (state, rowInfo) => {
-            return {
-                onClick: e => {
-                    this.generateSegmentTableData(this.props.routes[rowInfo.index]);
-                    this.setState({segmentTableToggle: true});
-                }
-            };
-        };
+            if (rowInfo && rowInfo.row) {
+                return {
+                    onClick: e => {
+                        this.generateSegmentTableData(this.props.routes[rowInfo.index]);
+                        this.setState({segmentTableToggle: true});
+                        if (rowInfo.index != this.state.rowEdit) {
+                            this.setState({
+                                rowEdit: rowInfo.index,
+                                selectedRowIndex: rowInfo.original,
+                                selectionChanged: this.state.selectionChanged
+                                    ? false
+                                    : true
+                            });
+                        } else {
+                            this.setState({
+                                rowEdit: null
+                            });
+                        }
+                    },
+                    style: {
+                        background:
+                            rowInfo.index === this.state.rowEdit ? "#00afec" : "#006699",
+                        color:
+                            rowInfo.index === this.state.rowEdit ? "#006699" : "#ffcc00"
+                    }
+                };
+            } else {
+                return {};
+            }
+        }
         const resultColumns = [
             {
                 Header: "Transport",
@@ -130,9 +163,7 @@ export default class SearchResult extends Component {
                     ) : null}
                 </div>
                 <div className="map">
-                    {this.state.segmentTableToggle ? (
-                        <MapContainer children={this.state.segmentData} places={this.props.places}/>
-                    ) : null}
+                    <MapContainer children={this.state.segmentData} places={this.props.places}/>
                 </div>
             </div>
         );
