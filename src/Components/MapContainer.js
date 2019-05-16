@@ -36,6 +36,8 @@ class MapContainer extends Component {
             )
         }));
 
+        //  let mapMarker = this.props.children.map(( ))
+
         const MapWithAMarker = withScriptjs(withGoogleMap(props =>
             <GoogleMap
                 defaultZoom={2}
