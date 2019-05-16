@@ -12,11 +12,10 @@ class MapContainer extends Component {
     render() {
 
         const decodePolyline = require("decode-google-map-polyline");
-        console.log(this.props.children)
         let pathMapping = this.props.children.map((array => {
             var path = array.path;
             if (path === undefined) {
-                let coordinates = [{
+                path = [{
                     lat: this.props.places[array.depPlace].lat,
                     lng: this.props.places[array.depPlace].lng
                 }
@@ -25,7 +24,6 @@ class MapContainer extends Component {
                         lng: this.props.places[array.arrPlace].lng
                     }
                 ];
-                path = coordinates;
             } else {
                 path = decodePolyline(path);
             }
@@ -37,14 +35,21 @@ class MapContainer extends Component {
             )
         }));
 
-        //  let mapMarker = this.props.children.map(( ))
+        let markerMapping = this.props.children.map(array => {
+            return (
+                <Marker defaultAnimation={2} position={{
+                    lat: this.props.places[array.depPlace].lat,
+                    lng: this.props.places[array.depPlace].lng
+                }}/>
+            )
+        });
 
         const MapWithAMarker = withScriptjs(withGoogleMap(props =>
             <GoogleMap
                 defaultZoom={2}
                 defaultCenter={{lat: 59.91273, lng: 10.74609}}
             >
-
+                {markerMapping}
                 {pathMapping}
 
             </GoogleMap>
