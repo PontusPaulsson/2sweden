@@ -16,8 +16,6 @@ export default class SearchResult extends Component {
             rowEdit: false,
             selectedRowIndex: 0,
             test: true
-
-
         };
     }
 
@@ -163,7 +161,7 @@ export default class SearchResult extends Component {
                     ) : null}
                 </div>
                 <div className="map">
-                    <MapContainer children={this.state.segmentData} places={this.props.places}/>
+                    <MapContainer segmentData={this.state.segmentData} places={this.props.places}/>
                 </div>
             </div>
         );
