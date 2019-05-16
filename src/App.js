@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Css/App.css";
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
+import "./Css/MediaQueries.css";
 import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";

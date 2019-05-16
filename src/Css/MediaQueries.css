@@ -1,0 +1,60 @@
+@media (max-width: 480px) {
+  .nav-list {
+    font-size: 2vh;
+  }
+  .from-to-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .title-container h1 {
+    font-size: 5vh;
+    padding-top: 0vh;
+  }
+  .invis-margin {
+    margin-right: 10vw;
+  }
+  .Logo {
+    margin-left: 3vw;
+    max-width: 10vw;
+    max-height: 10vw;
+    margin-bottom: 1vh;
+  }
+  .input {
+    margin-bottom: 2vh;
+    font-size: 2vh;
+  }
+  .search {
+    width: 100%;
+    font-size: 2vh;
+  }
+  .Stockholm {
+    width: 33%;
+    border-radius: 1.5vh;
+    margin-right: 0.8vw;
+    box-shadow: 0 0 0 0.2vh black;
+  }
+  .Are {
+    width: 33%;
+    border-radius: 1.5vh;
+    box-shadow: 0 0 0 0.2vh black;
+  }
+  .Falun {
+    width: 33%;
+    border-radius: 1.5vh;
+    margin-left: 0.8vw;
+    box-shadow: 0 0 0 0.2vh black;
+  }
+  .img-inspiration {
+    display: flex;
+
+    justify-content: center;
+    border: 1.5vh solid #006699;
+    width: 75vw;
+    height: 32vh;
+    margin: auto;
+    margin-top: 3vh;
+    border-radius: 1.5vh;
+    box-shadow: 0 0 0 0.3vh black;
+    background-color: #006699;
+  }
+}

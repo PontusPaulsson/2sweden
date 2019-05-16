@@ -1,19 +1,18 @@
 @import url("https://fonts.googleapis.com/css?family=Lato|Raleway");
+
 * {
   box-sizing: border-box;
 }
-
 body {
   background-color: #ffcc00;
   text-shadow: -0.3vh 0 black, 0 0.3vh black, 0.3vh 0 black, 0 -0.3vh black;
   font-family: Lato;
+  width: 100%;
 }
-
 .nav-item {
   padding: 2vh;
   cursor: pointer;
 }
-
 .Stockholm {
   width: 33%;
   border-radius: 1.5vh;
@@ -31,7 +30,6 @@ body {
   margin-left: 0.8vw;
   box-shadow: 0 0 0 0.2vh black;
 }
-
 .img-inspiration {
   display: flex;
   justify-content: center;
@@ -49,7 +47,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   box-shadow: 0 0 0 0.3vh black;
-  flex-direction: column;
+  flex-direction: row;
   background-color: #006699;
   color: #ffcc00;
   font-weight: bold;
@@ -78,20 +76,4 @@ body {
 }
 .invis-margin {
   margin-right: 7vw;
-}
-
-@media (min-width: 480px) {
-  .select-to {
-    width: 45%;
-    margin-top: 0px;
-  }
-  .from-input {
-    width: 45%;
-  }
-  .nav-list {
-    flex-direction: row;
-  }
-  .from-to-container {
-    flex-direction: row;
-  }
 }

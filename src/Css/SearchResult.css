@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
 }
-
 .result-table {
   max-width: 100%;
   background-color: #006699;
@@ -16,13 +15,14 @@
   box-shadow: 0 0 0 0.3vh black;
   margin-bottom: 1.5vh;
   flex-grow: 1;
+  max-height: 29.85vh;
 }
-
 .result-container {
   display: flex;
   flex-direction: row;
   margin-top: 1.5vh;
   min-height: 62.7vh;
+  max-height: 62.7vh;
 }
 .map-container {
   display: flex;

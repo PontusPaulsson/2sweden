@@ -17,6 +17,7 @@
 .from-to-container {
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
 }
 .input {
   border-radius: 1vh;
