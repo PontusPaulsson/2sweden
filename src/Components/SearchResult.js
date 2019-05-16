@@ -60,6 +60,10 @@ export default class SearchResult extends Component {
 
     };
 
+    componentWillMount(){
+        this.generateSegmentTableData(this.props.routes[0]);
+    }
+
     render() {
         const onRowClick = (state, rowInfo) => {
             return {
@@ -130,9 +134,7 @@ export default class SearchResult extends Component {
                     ) : null}
                 </div>
                 <div className="map">
-                    {this.state.segmentTableToggle ? (
-                        <MapContainer children={this.state.segmentData} places={this.props.places}/>
-                    ) : null}
+                    <MapContainer children={this.state.segmentData} places={this.props.places} />
                 </div>
             </div>
         );
