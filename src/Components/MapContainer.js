@@ -5,10 +5,12 @@ import {
     withGoogleMap,
     GoogleMap,
     Marker,
-    Polyline
+    Polyline,
 } from "react-google-maps";
 import {lifecycle} from "recompose";
+import {IoIosAirplane, IoIosCar, IoMdTrain, IoIosWalk, IoIosBus, IoMdBug} from "react-icons/io";
 
+const {MarkerWithLabel} = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 const decodePolyline = require("decode-google-map-polyline");
 
 function createPathMapping(segmentData, places) {
@@ -45,32 +47,37 @@ function createMarkerMapping(segmentData, places) {
         function getIcon(transport) {
             switch (transport) {
                 case "Walk" :
-                    return 'https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_directions_walk_48px-512.png';
+                    return <IoIosWalk/>
                 case "Bus" :
-                    return 'https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/439/Aiga_bus-512.png';
+                    return <IoIosBus/>
                 case "Plane" :
-                    return 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-plane-128.png';
+                    return <IoIosAirplane/>;
                 case "Train" :
-                    return 'https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/472/aiga_rail_transportation-512.png';
+                    return <IoMdTrain/>
                 case "Car" :
-                    return 'https://cdn4.iconfinder.com/data/icons/finance-banking-2/32/car-128.png';
+                    return <IoIosCar/>
                 default :
-                    return 'https://cdn2.iconfinder.com/data/icons/interface-12/24/interface-39-512.png';
+                    return <IoMdBug/>;
             }
         }
 
-        let iconMarker = new window.google.maps.MarkerImage(
-            getIcon(array.transport),
-            null, /* size is determined at runtime */
-            null, /* origin is 0,0 */
-            null, /* anchor is bottom center of the scaled image */
-            new window.google.maps.Size(32, 32));
+        // Hack to remove google-maps marker.
+        var removeMarker = new window.google.maps.MarkerImage(
+            "", // url
+            new window.google.maps.Size(0, 0), // size
+            new window.google.maps.Point(0, 0), // origin
+            new window.google.maps.Point(0, 0), // anchor
+            new window.google.maps.Size(0, 0)); // scaledSize
+
         return (
-            <Marker position={{
+            <MarkerWithLabel position={{
                 lat: places[array.depPlace].lat,
                 lng: places[array.depPlace].lng
-            }} icon={iconMarker}
-            />
+            }} icon={removeMarker} labelAnchor={new window.google.maps.Point(0, 0)}
+                             labelStyle={{backgroundColor: "white", fontSize: "15px", padding: "0"}}
+            >
+                <div>{getIcon(array.transport)} {array.from}</div>
+            </MarkerWithLabel>
         )
     });
     return markerMapping;
@@ -95,13 +102,10 @@ class MapContainer extends Component {
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>
     <GoogleMap
-        defaultZoom={2}
-        defaultCenter={{lat: 59.91273, lng: 10.74609}}
         ref={props.zoomToMarkers}
     >
         {createMarkerMapping(props.segmentData, props.places)}
         {createPathMapping(props.segmentData, props.places)}
-
     </GoogleMap>
 ));
 

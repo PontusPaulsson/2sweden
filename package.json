@@ -11,7 +11,8 @@
     "react-google-maps": "^9.4.5",
     "react-scripts": "3.0.0",
     "react-table": "^6.10.0",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "react-icons": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
