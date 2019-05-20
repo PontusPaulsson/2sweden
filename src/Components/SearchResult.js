@@ -2,6 +2,46 @@ import React, {Component} from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import MapContainer from "./MapContainer";
+const
+    resultColumns = [
+        {
+            Header: "Transport",
+            accessor: "transport" // String-based value accessors!
+        },
+        {
+            Header: "Time",
+            accessor: "time"
+            // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
+        },
+        {
+            accessor: "price", // Required because our accessor is not a string
+            Header: "Price (SEK)"
+        },
+        {
+            accessor: "transfers", // Required because our accessor is not a string
+            Header: "Transfers"
+        }
+    ];
+
+const
+    segmentColumns = [
+        {
+            Header: "Transport",
+            accessor: "transport" // String-based value accessors!
+        },
+        {
+            Header: "From",
+            accessor: "from" // String-based value accessors!
+        },
+        {
+            Header: "To",
+            accessor: "to" // String-based value accessors!
+        },
+        {
+            Header: "Time",
+            accessor: "time" // String-based value accessors!
+        }
+    ];
 
 export default class SearchResult extends Component {
     constructor(props) {
@@ -15,7 +55,8 @@ export default class SearchResult extends Component {
             selectionChanged: false,
             rowEdit: false,
             selectedRowIndex: 0,
-            test: true
+            test: true,
+            rowClicked: false
         };
     }
 
@@ -26,6 +67,7 @@ export default class SearchResult extends Component {
     };
 
     generateSegmentTableData = route => {
+        this.setState({rowClicked: false});
         let segments = [];
         route.segments.map(segment => {
             let newSegment = {
@@ -65,80 +107,75 @@ export default class SearchResult extends Component {
     };
 
     componentWillReceiveProps() {
+
         this.generateSegmentTableData(this.props.routes[0]);
     }
-
-    render() {
-        const onRowClick = (state, rowInfo) => {
-            if (rowInfo && rowInfo.row) {
+    onRowClick = (state, rowInfo) => {
+        if (rowInfo && rowInfo.row) {
+            console.log(this.state);
+            console.log("<<<<<<<<<<<<<<<<<<<<CONSOLELOG>>>>>>>>>>>>>>>>>>>>>>>");
+            console.log(rowInfo.index)
+            if (this.state.rowClicked === false) {
+                switch (rowInfo.index) {
+                    case 0:
+                        return {
+                            style: {
+                                background: "#ffcc00",
+                                color: "#006699"
+                            }
+                        }
+                        break;
+                }
+            }
+            if (rowInfo.index === this.state.rowEdit && this.state.rowClicked === false){
                 return {
                     onClick: e => {
                         this.generateSegmentTableData(this.props.routes[rowInfo.index]);
-                        this.setState({segmentTableToggle: true});
-                        if (rowInfo.index != this.state.rowEdit) {
-                            this.setState({
-                                rowEdit: rowInfo.index,
-                                selectedRowIndex: rowInfo.original,
-                                selectionChanged: this.state.selectionChanged
-                                    ? false
-                                    : true
-                            });
-                        } else {
-                            this.setState({
-                                rowEdit: null
-                            });
-                        }
+                        this.setState({
+                            segmentTableToggle: true,
+                            rowClicked: true,
+                            rowEdit: rowInfo.index,
+                            selectedRowIndex: rowInfo.original,
+                            selectionChanged: this.state.selectionChanged
+                                ? false
+                                : true
+                        });
                     },
                     style: {
-                        background:
-                            rowInfo.index === this.state.rowEdit ? "#ffcc00" : "#006699",
-                        color:
-                            rowInfo.index === this.state.rowEdit ? "#006699" : "#ffcc00"
+                        background:"#006699",
+                        color: "#ffcc00"
                     }
                 };
-            } else {
-                return {};
             }
-        }
-        const resultColumns = [
-            {
-                Header: "Transport",
-                accessor: "transport" // String-based value accessors!
-            },
-            {
-                Header: "Time",
-                accessor: "time"
-                // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
-            },
-            {
-                accessor: "price", // Required because our accessor is not a string
-                Header: "Price (SEK)"
-            },
-            {
-                accessor: "transfers", // Required because our accessor is not a string
-                Header: "Transfers"
-            }
-        ];
+            return {
+                onClick: e => {
+                    this.generateSegmentTableData(this.props.routes[rowInfo.index]);
+                    this.setState({
+                        segmentTableToggle: true,
+                        rowClicked: true,
+                        rowEdit: rowInfo.index,
+                        selectedRowIndex: rowInfo.original,
+                        selectionChanged: this.state.selectionChanged
+                            ? false
+                            : true
+                    });
+                },
+                style: {
+                    background:
+                        rowInfo.index === this.state.rowEdit ? "#ffcc00" : "#006699",
+                    color:
+                        rowInfo.index === this.state.rowEdit ? "#006699" : "#ffcc00"
+                }
+            };
 
-        const segmentColumns = [
-            {
-                Header: "Transport",
-                accessor: "transport" // String-based value accessors!
-            },
-            {
-                Header: "From",
-                accessor: "from" // String-based value accessors!
-            },
-            {
-                Header: "To",
-                accessor: "to" // String-based value accessors!
-            },
-            {
-                Header: "Time",
-                accessor: "time" // String-based value accessors!
-            }
-        ];
+        } else {
+            return {};
+        }
+    }
+
+    render() {
         return (
+
             <div className="result-container">
                 <div className="map-container">
                     <ReactTable
@@ -147,7 +184,7 @@ export default class SearchResult extends Component {
                         columns={resultColumns}
                         showPagination={false}
                         defaultPageSize={this.props.routes.length}
-                        getTrProps={onRowClick}
+                        getTrProps={this.onRowClick}
                     />
 
                     {this.state.segmentTableToggle ? (
@@ -164,6 +201,7 @@ export default class SearchResult extends Component {
                     <MapContainer segmentData={this.state.segmentData} places={this.props.places}/>
                 </div>
             </div>
-        );
+        )
+            ;
     }
 }
