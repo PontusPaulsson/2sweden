@@ -80,7 +80,7 @@ const MapWithAMarker = withScriptjs(withGoogleMap(props =>
 ));
 
 const MapWithAMarkerExtended = lifecycle({
-    componentDidMount() {
+    componentWillReceiveProps() {
         let coords = [{
             lng: this.props.places[0].lng,
             lat: this.props.places[0].lat
@@ -94,7 +94,9 @@ const MapWithAMarkerExtended = lifecycle({
                 coords.forEach((coord) => {
                     bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
                 })
-                map.fitBounds(bounds);
+                if(map != null){
+                    map.fitBounds(bounds);
+                };
             }
         })
     }
