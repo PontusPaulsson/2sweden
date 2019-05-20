@@ -14,18 +14,18 @@ body {
   cursor: pointer;
 }
 .Stockholm {
-  width: 33%;
+  width: 32.5%;
   border-radius: 1.5vh;
   margin-right: 0.8vw;
   box-shadow: 0 0 0 0.2vh black;
 }
 .Are {
-  width: 33%;
+  width: 32.5%;
   border-radius: 1.5vh;
   box-shadow: 0 0 0 0.2vh black;
 }
 .Falun {
-  width: 33%;
+  width: 32.5%;
   border-radius: 1.5vh;
   margin-left: 0.8vw;
   box-shadow: 0 0 0 0.2vh black;
@@ -52,6 +52,7 @@ body {
   color: #ffcc00;
   font-weight: bold;
   font-size: 3vh;
+  padding: 0;
 }
 .title-container {
   padding-top: 2vh;
