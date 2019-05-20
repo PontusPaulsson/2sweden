@@ -8,7 +8,7 @@ export const Navbar = () => {
     "Se rekommendationer"
   ];
   return (
-    <nav>
+      <nav data-test ='nav-bar-container'>
       <ul className="nav-list">
         {links.map(link => (
           <li className="nav-item" key={link}>
