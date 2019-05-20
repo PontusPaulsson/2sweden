@@ -40,11 +40,37 @@ function createPathMapping(segmentData, places) {
 
 function createMarkerMapping(segmentData, places) {
     let markerMapping = segmentData.map(array => {
+        var google;
+
+        function getIcon(transport) {
+            switch (transport) {
+                case "Walk" :
+                    return 'https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_directions_walk_48px-512.png';
+                case "Bus" :
+                    return 'https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/439/Aiga_bus-512.png';
+                case "Plane" :
+                    return 'https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-plane-128.png';
+                case "Train" :
+                    return 'https://cdn4.iconfinder.com/data/icons/aiga-symbol-signs/472/aiga_rail_transportation-512.png';
+                case "Car" :
+                    return 'https://cdn4.iconfinder.com/data/icons/finance-banking-2/32/car-128.png';
+                default :
+                    return 'https://cdn2.iconfinder.com/data/icons/interface-12/24/interface-39-512.png';
+            }
+        }
+
+        let iconMarker = new window.google.maps.MarkerImage(
+            getIcon(array.transport),
+            null, /* size is determined at runtime */
+            null, /* origin is 0,0 */
+            null, /* anchor is bottom center of the scaled image */
+            new window.google.maps.Size(32, 32));
         return (
-            <Marker defaultAnimation={2} position={{
+            <Marker position={{
                 lat: places[array.depPlace].lat,
                 lng: places[array.depPlace].lng
-            }}/>
+            }} icon={iconMarker}
+            />
         )
     });
     return markerMapping;
@@ -94,9 +120,10 @@ const MapWithAMarkerExtended = lifecycle({
                 coords.forEach((coord) => {
                     bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
                 })
-                if(map != null){
+                if (map != null) {
                     map.fitBounds(bounds);
-                };
+                }
+                ;
             }
         })
     }
