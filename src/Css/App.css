@@ -54,26 +54,38 @@ body {
   font-size: 3vh;
   padding: 0;
 }
-.title-container {
+.header-container {
   padding-top: 2vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   color: #006699;
   font-weight: bold;
-  margin-top: auto;
-}
-.title-container h1 {
   font-family: Raleway;
   margin: 0;
-  font-size: 8.5vh;
+  font-size: 11vh;
 }
-.Logo {
-  margin-right: 1vw;
-  max-width: 5vw;
-  max-height: 5vw;
+.title-container {
+  display: flex;
+  justify-content: space-between;
+}
+.title-logoitem {
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+}
+.logo {
+  margin-right: 0.2vw;
+  max-width: 8vh;
+  max-height: 8vh;
   border-radius: 100%;
-  margin-left: 1vw;
   box-shadow: 0 0 0 0.3vh black;
+}
+.desktop-logo {
+  margin-right: 0.2vw;
+  max-width: 15vh;
+  max-height: 15vh;
+  border-radius: 1.5vh;
+  box-shadow: 0 0 0 0.3vh black;
+  margin-left: 2vw;
 }
 .invis-margin {
   margin-right: 7vw;

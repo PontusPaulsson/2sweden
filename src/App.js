@@ -91,7 +91,6 @@ class App extends Component {
         ) : (
           <Inspiration />
         )}
-
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
