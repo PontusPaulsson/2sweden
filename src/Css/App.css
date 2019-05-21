@@ -73,6 +73,7 @@ body {
   margin-right: 1.5vw;
 }
 .logo {
+  animation: App-logo-spin infinite 15s linear;
   margin-right: 0.2vw;
   max-width: 8vh;
   max-height: 8vh;
@@ -89,4 +90,13 @@ body {
 }
 .invis-margin {
   margin-right: 7vw;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
