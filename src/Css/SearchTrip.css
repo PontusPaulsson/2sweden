@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 .search-trip-container {
-  border: 1.5vh solid #006699;
+  padding: 1.5vh;
   border-radius: 1.5vh;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@
 .input {
   border-radius: 1vh;
   height: 6vh;
-  width: stretch;
+  width: 100%;
   margin-left: 0.4vw;
   margin-right: 0.4vw;
   font-size: 3vh;
@@ -34,4 +34,11 @@
   margin-right: 0.4vw;
   border-radius: 1vh;
   font-size: 3vh;
+}
+.search:disabled {
+  /*
+  open for suggestions
+  otherewise:
+  animation: spin infinite 1s linear;
+*/
 }

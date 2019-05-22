@@ -12,6 +12,10 @@ body {
 .nav-item {
   padding: 2vh;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.nav-item:hover {
+  transform: scale(1.1);
 }
 .Stockholm {
   width: 32.5%;
@@ -33,7 +37,7 @@ body {
 .img-inspiration {
   display: flex;
   justify-content: center;
-  border: 1.5vh solid #006699;
+  padding: 1.5vh;
   width: 75vw;
   height: 32vh;
   margin: auto;
@@ -73,7 +77,7 @@ body {
   margin-right: 1.5vw;
 }
 .logo {
-  animation: App-logo-spin infinite 15s linear;
+  animation: spin infinite 15s linear;
   margin-right: 0.2vw;
   max-width: 8vh;
   max-height: 8vh;
@@ -92,7 +96,7 @@ body {
   margin-right: 7vw;
 }
 
-@keyframes App-logo-spin {
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }

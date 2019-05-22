@@ -3,7 +3,7 @@ import Logo from "../img/Logo.png";
 export const Title = () => {
   return (
     <h1 className="title-container">
-      <img className="desktop-logo" src={Logo} alt="Logo" />
+      <img className="desktop-logo bird" src={Logo} alt="Logo" />
       <div className="header-container">
         <span>2Sweden</span>
         <span className="title-logoitem">
