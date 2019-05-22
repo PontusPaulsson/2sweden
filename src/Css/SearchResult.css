@@ -15,13 +15,13 @@
   box-shadow: 0 0 0 0.3vh black;
   margin-bottom: 1.5vh;
   flex-grow: 1;
-  max-height: 26vh;
+  max-height: 27vh;
 }
 .result-container {
   display: flex;
   flex-direction: row;
   margin-top: 1.5vh;
-  height: 55vh;
+  height: 56.5vh;
 }
 .map-container {
   display: flex;

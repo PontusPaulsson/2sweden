@@ -36,6 +36,7 @@ export default class SearchTrip extends Component {
 
   render() {
     const options = ["Stockholm", "Åre", "Falun"];
+    const isEnabled = this.state.from.length > 0;
     return (
       <React.Fragment>
         <div
@@ -56,7 +57,9 @@ export default class SearchTrip extends Component {
                   <option key={option}> {option}</option>
                 ))}
               </select>
-              <button className="search">Sök</button>
+              <button disabled={!isEnabled} className="search">
+                Search
+              </button>
             </div>
           </form>
         </div>
