@@ -23,7 +23,7 @@
   margin-top: 1.5vh;
   height: 56.5vh;
 }
-.map-container {
+.result-table-container {
   display: flex;
   flex-direction: column;
   width: 60%;

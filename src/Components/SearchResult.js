@@ -171,7 +171,7 @@ export default class SearchResult extends Component {
   render() {
     return (
       <div className="result-container">
-        <div className="map-container">
+        <div className="result-table-container">
           <ReactTable
             className="result-table"
             data={this.props.tableData}
