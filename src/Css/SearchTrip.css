@@ -35,10 +35,3 @@
   border-radius: 1vh;
   font-size: 3vh;
 }
-.search:disabled {
-  /*
-  open for suggestions
-  otherewise:
-  animation: spin infinite 1s linear;
-*/
-}

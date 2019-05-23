@@ -92,8 +92,9 @@ body {
   box-shadow: 0 0 0 0.3vh black;
   margin-left: 2vw;
 }
-.invis-margin {
-  margin-right: 7vw;
+.os-rings {
+  height: 15vh;
+  margin-right: 2vw;
 }
 
 @keyframes spin {

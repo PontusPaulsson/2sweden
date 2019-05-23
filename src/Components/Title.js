@@ -1,9 +1,10 @@
 import React from "react";
 import Logo from "../img/Logo.png";
+import OSrings from "../img/OSrings.png";
 export const Title = () => {
   return (
     <h1 className="title-container">
-      <img className="desktop-logo bird" src={Logo} alt="Logo" />
+      <img className="desktop-logo" src={Logo} alt="Logo" />
       <div className="header-container">
         <span>2Sweden</span>
         <span className="title-logoitem">
@@ -11,7 +12,7 @@ export const Title = () => {
         </span>
         <span>2024</span>
       </div>
-      <div className="invis-margin" />
+      <img className="os-rings" src={OSrings} alt="OS Rings" />
     </h1>
   );
 };
