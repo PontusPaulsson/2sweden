@@ -122,7 +122,7 @@ export default class SearchResult extends Component {
                 color: "#006699"
               }
             };
-            break;
+          default:
         }
       }
       if (
