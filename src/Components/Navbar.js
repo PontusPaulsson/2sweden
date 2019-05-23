@@ -1,15 +1,19 @@
 import React from "react";
 
 export const Navbar = () => {
-  const links = ["Search Transport", "About the Event", "About the Locations"];
   return (
     <nav data-test="nav-bar-container">
       <ul className="nav-list">
-        {links.map(link => (
-          <li className="nav-item" key={link}>
-            {link}
-          </li>
-        ))}
+        <li className="nav-item">Search Transport</li>
+        <li className="nav-item">About the Event</li>
+        <li className="nav-item">
+          About the Locations
+          <ul className="dropdown-content">
+            <li>Stockholm</li>
+            <li>Åre</li>
+            <li>Falun</li>
+          </ul>
+        </li>
       </ul>
     </nav>
   );

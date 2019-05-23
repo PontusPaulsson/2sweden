@@ -35,3 +35,6 @@
   border-radius: 1vh;
   font-size: 3vh;
 }
+.search:disabled {
+  opacity: 0.9;
+}
