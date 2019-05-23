@@ -9,14 +9,6 @@ body {
   font-family: Lato;
   width: 100%;
 }
-.nav-item {
-  padding: 2vh;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-.nav-item:hover {
-  transform: scale(1.1);
-}
 .Stockholm {
   width: 32.5%;
   border-radius: 1.5vh;
@@ -58,6 +50,37 @@ body {
   font-size: 3vh;
   padding: 0;
 }
+.nav-item {
+  padding: 2vh;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.dropdown-content {
+  list-style: none;
+  padding: 1vh;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  background-color: #006699;
+  box-shadow: 0 0 0 0.3vh #000000;
+  border-radius: 1.5vh;
+  width: 100%;
+  opacity: 0.9;
+  margin-top: 0.5vh;
+}
+.dropdown-content li {
+  padding-left: 1vw;
+}
+.dropdown-content li:hover {
+  background-color: #ffcc00;
+}
+.nav-item:hover .dropdown-content {
+  display: block;
+  animation: fade 0.8s;
+}
+.nav-item:hover {
+  transform: scale(1.1);
+}
 .header-container {
   padding-top: 2vh;
   display: flex;
@@ -96,12 +119,26 @@ body {
   height: 15vh;
   margin-right: 2vw;
 }
-
+.os-rings:hover {
+  animation: spin 1s infinite;
+}
 @keyframes spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@keyframes fade {
+  from {
+    font-size: 0;
+    height: 0%;
+    width: 0vw;
+  }
+  to {
+    font-size: 100%;
+    height: 170%;
+    width: 100%;
   }
 }

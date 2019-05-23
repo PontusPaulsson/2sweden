@@ -20,9 +20,6 @@
     margin-top: 0;
     padding-top: 0;
   }
-  .invis-margin {
-    margin-right: 0;
-  }
   .title-logoitem {
     margin-left: 2vw;
     margin-right: 2vw;
@@ -116,5 +113,17 @@
     margin-right: 1vw;
     margin-left: 1vw;
     margin-bottom: 1.5vh;
+  }
+  .os-rings {
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (max-width: 1340px) {
+  .os-rings {
+    height: 0;
+    width: 0;
+    margin-right: 0;
   }
 }
