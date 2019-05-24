@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Css/App.css";
 import "./Css/SearchTrip.css";
+import "./Css/SearchResult.css";
+import "./Css/MediaQueries.css";
 import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
@@ -11,18 +13,18 @@ const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
 
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          routes: [],
-          vehicles: [],
-          places: [],
-          tableData: [],
-          showResult: false,
-          currencyCode: ""
-        };
-    }
-  
+  constructor(props) {
+    super(props);
+    this.state = {
+      routes: [],
+      vehicles: [],
+      places: [],
+      tableData: [],
+      showResult: false,
+      currencyCode: ""
+    };
+  }
+
   getLocalCurrencyCode = () => {
     fetch(`http://www.geoplugin.net/json.gp`)
       .then(response => response.json())
@@ -32,39 +34,38 @@ class App extends Component {
   };
 
   doSearch = (from, to) => {
-      if (from) {
-          fetch(
-              `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
-                  this.state.currencyCode
-                  }`
-          )
-              .then(response => response.json())
-              .then(data => {
-                  this.setState({
-                      routes: data.routes,
-                      vehicles: data.vehicles,
-                      places: data.places,
-                      showResult: true
-                  });
-                  this.generateTableData(this.state.routes);
-              })
-              .catch(error => {
-                  console.log(error);
-                  this.setState({showResult: false});
-              });
-      }
-  }
-      
-    componentWillMount() {
-        this.getLocalCurrencyCode();
+    if (from) {
+      fetch(
+        `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
+          this.state.currencyCode
+        }`
+      )
+        .then(response => response.json())
+        .then(data => {
+          this.setState({
+            routes: data.routes,
+            vehicles: data.vehicles,
+            places: data.places,
+            showResult: true
+          });
+          this.generateTableData(this.state.routes);
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({ showResult: false });
+        });
     }
+  };
+
+  componentWillMount() {
+    this.getLocalCurrencyCode();
+  }
 
   timeConvert = num => {
     let hours = Math.floor(num / 60);
     let minutes = num % 60;
     return hours + "h " + minutes + "m";
   };
-
 
   generateTableData = routes => {
     let newData = [];
@@ -90,7 +91,6 @@ class App extends Component {
         ) : (
           <Inspiration />
         )}
-
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}

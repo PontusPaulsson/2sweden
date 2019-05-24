@@ -1,49 +1,159 @@
-import React from 'react';
-import {Component} from 'react';
+import React from "react";
+import { Component } from "react";
 import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker, Polyline,
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Polyline
 } from "react-google-maps";
+import { lifecycle } from "recompose";
+import {
+  IoIosAirplane,
+  IoIosCar,
+  IoMdTrain,
+  IoIosWalk,
+  IoIosBus,
+  IoMdBug
+} from "react-icons/io";
+
+const {
+  MarkerWithLabel
+} = require("react-google-maps/lib/components/addons/MarkerWithLabel");
+const decodePolyline = require("decode-google-map-polyline");
+
+function createPathMapping(segmentData, places) {
+  let pathMapping = segmentData.map(array => {
+    var path = array.path;
+    if (path === undefined) {
+      path = [
+        {
+          lat: places[array.depPlace].lat,
+          lng: places[array.depPlace].lng
+        },
+        {
+          lat: places[array.arrPlace].lat,
+          lng: places[array.arrPlace].lng
+        }
+      ];
+    } else {
+      path = decodePolyline(path);
+    }
+    return (
+      <Polyline
+        path={path}
+        options={{ strokeColor: array.strokeColor, strokeWeight: 3 }}
+        visible={true}
+      />
+    );
+  });
+
+  return pathMapping;
+}
+
+function createMarkerMapping(segmentData, places) {
+  let markerMapping = segmentData.map(array => {
+    function getIcon(transport) {
+      switch (transport) {
+        case "Walk":
+          return <IoIosWalk />;
+        case "Bus":
+          return <IoIosBus />;
+        case "Plane":
+          return <IoIosAirplane />;
+        case "Train":
+          return <IoMdTrain />;
+        case "Car":
+          return <IoIosCar />;
+        default:
+          return <IoMdBug />;
+      }
+    }
+
+    // Hack to remove google-maps marker.
+    var removeMarker = new window.google.maps.MarkerImage(
+      "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // url
+      null, // size
+      null, // origin
+      null, // anchor
+      new window.google.maps.Size(32, 32)
+    ); // scaledSize
+
+    return (
+      <MarkerWithLabel
+        position={{
+          lat: places[array.depPlace].lat,
+          lng: places[array.depPlace].lng
+        }}
+        icon={removeMarker}
+        labelAnchor={new window.google.maps.Point(0, 0)}
+        labelStyle={{
+          backgroundColor: "white",
+          color: "#006699",
+          fontSize: "15px",
+          border: "solid #ffcc00 1px",
+          borderRadius: "5px",
+          padding: "0"
+        }}
+      >
+        <div>
+          {getIcon(array.transport)} {array.from}
+        </div>
+      </MarkerWithLabel>
+    );
+  });
+  return markerMapping;
+}
 
 class MapContainer extends Component {
-    render() {
-        const decodePolyline = require('decode-google-map-polyline');
-
-        var oslo = {lat: 59.91273, lng: 10.74609};
-        var sthml = {lat: 59.33258, lng: 18.0649};
-        var array = [];
-        array.push(oslo);
-        array.push(sthml);
-
-        // path: segment.path, adda i newSegment array.
-
-        // adda ny vid linje 124 i SearchResult.js {this.state.segmentTableToggle ? (
-        //                     <MapContainer children={this.state.segmentData}/>
-        //                 ) : null}
-
-        const MapWithAMarker = withScriptjs(withGoogleMap(props =>
-            <GoogleMap
-                defaultZoom={5}
-                defaultCenter={{lat: array[0].lat, lng: array[0].lng}}
-            >
-                <Polyline path={array}
-                          visible={true}
-                />
-
-            </GoogleMap>
-        ));
-        const url = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_API_KEY}&v=3.exp&libraries=geometry,drawing,places`;
-        return (
-            <MapWithAMarker
-                googleMapURL={url}
-                loadingElement={<div style={{height: `100%`}}/>}
-                containerElement={<div style={{height: `400px`}}/>}
-                mapElement={<div style={{height: `100%`}}/>}
-            />
-        )
-    }
+  render() {
+    return (
+      <MapWithAMarkerExtended
+        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
+          process.env.REACT_APP_GOOGLE_API_KEY
+        }&v=3.exp&libraries=geometry,drawing,places`}
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `100%` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+        segmentData={this.props.segmentData}
+        places={this.props.places}
+      />
+    );
+  }
 }
+
+const MapWithAMarker = withScriptjs(
+  withGoogleMap(props => (
+    <GoogleMap ref={props.zoomToMarkers}>
+      {createMarkerMapping(props.segmentData, props.places)}
+      {createPathMapping(props.segmentData, props.places)}
+    </GoogleMap>
+  ))
+);
+
+const MapWithAMarkerExtended = lifecycle({
+  componentWillReceiveProps() {
+    let coords = [
+      {
+        lng: this.props.places[0].lng,
+        lat: this.props.places[0].lat
+      },
+      {
+        lng: this.props.places[1].lng,
+        lat: this.props.places[1].lat
+      }
+    ];
+    this.setState({
+      zoomToMarkers: map => {
+        const bounds = new window.google.maps.LatLngBounds();
+        coords.forEach(coord => {
+          bounds.extend(new window.google.maps.LatLng(coord.lat, coord.lng));
+        });
+        if (map != null) {
+          map.fitBounds(bounds);
+        }
+      }
+    });
+  }
+})(MapWithAMarker);
 
 export default MapContainer;
