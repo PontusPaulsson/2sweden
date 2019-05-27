@@ -54,7 +54,8 @@ export default class SearchResult extends Component {
       rowEdit: false,
       selectedRowIndex: 0,
       test: true,
-      rowClicked: false
+      rowClicked: false,
+      expanded: {}
     };
   }
 
@@ -167,30 +168,40 @@ export default class SearchResult extends Component {
       return {};
     }
   };
-
+  handleRowExpanded(rowsState, index) {
+    this.setState({
+      expanded: {
+        [index[0]]: !this.state.expanded[index[0]]
+      }
+    });
+  }
   render() {
     return (
       <div className="result-container">
-        <div className="result-table-container">
-          <ReactTable
-            className="result-table"
-            data={this.props.tableData}
-            columns={resultColumns}
-            showPagination={false}
-            defaultPageSize={this.props.routes.length}
-            getTrProps={this.onRowClick}
-          />
-
-          {this.state.segmentTableToggle ? (
-            <ReactTable
-              className="result-table"
-              data={this.state.segmentData}
-              showPagination={false}
-              columns={segmentColumns}
-              pageSize={this.state.segmentTableLength}
-            />
-          ) : null}
-        </div>
+        <ReactTable
+          className="result-table"
+          data={this.props.tableData}
+          columns={resultColumns}
+          showPagination={false}
+          defaultPageSize={this.props.routes.length}
+          getTrProps={this.onRowClick}
+          expanded={this.state.expanded}
+          onExpandedChange={(newExpanded, index, event) =>
+            this.handleRowExpanded(newExpanded, index, event)
+          }
+          SubComponent={row => {
+            return (
+              <ReactTable
+                className="result-subtable"
+                data={this.state.segmentData}
+                showPagination={false}
+                columns={segmentColumns}
+                pageSize={this.state.segmentTableLength}
+                sortable={false}
+              />
+            );
+          }}
+        />
         <div className="map">
           <MapContainer
             segmentData={this.state.segmentData}
