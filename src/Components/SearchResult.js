@@ -54,7 +54,8 @@ export default class SearchResult extends Component {
       rowEdit: false,
       selectedRowIndex: 0,
       test: true,
-      rowClicked: false
+      rowClicked: false,
+      expanded: {}
     };
   }
 
@@ -167,30 +168,56 @@ export default class SearchResult extends Component {
       return {};
     }
   };
-
+  expandRow(row) {
+    var expanded = { ...this.state.expanded };
+    if (expanded[row.viewIndex]) {
+      expanded = false;
+    } else {
+      expanded = true;
+    }
+    this.setState({
+      expanded: { [row.viewIndex]: expanded }
+    });
+  }
   render() {
     return (
       <div className="result-container">
-        <div className="result-table-container">
-          <ReactTable
-            className="result-table"
-            data={this.props.tableData}
-            columns={resultColumns}
-            showPagination={false}
-            defaultPageSize={this.props.routes.length}
-            getTrProps={this.onRowClick}
-          />
-
-          {this.state.segmentTableToggle ? (
-            <ReactTable
-              className="result-table"
-              data={this.state.segmentData}
-              showPagination={false}
-              columns={segmentColumns}
-              pageSize={this.state.segmentTableLength}
-            />
-          ) : null}
-        </div>
+        <ReactTable
+          className="result-table"
+          data={this.props.tableData}
+          columns={resultColumns}
+          showPagination={false}
+          defaultPageSize={this.props.routes.length}
+          getTrProps={this.onRowClick}
+          expanded={this.state.expanded}
+          getTdProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                this.expandRow(rowInfo);
+              }
+            };
+          }}
+          getTheadThProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                instance.sortColumn(column);
+                this.setState({ expanded: false });
+              }
+            };
+          }}
+          SubComponent={row => {
+            return (
+              <ReactTable
+                className="result-subtable"
+                data={this.state.segmentData}
+                showPagination={false}
+                columns={segmentColumns}
+                pageSize={this.state.segmentTableLength}
+                sortable={false}
+              />
+            );
+          }}
+        />
         <div className="map">
           <MapContainer
             segmentData={this.state.segmentData}
