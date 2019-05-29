@@ -168,11 +168,15 @@ export default class SearchResult extends Component {
       return {};
     }
   };
-  handleRowExpanded(rowsState, index) {
+  expandRow(row) {
+    var expanded = { ...this.state.expanded };
+    if (expanded[row.viewIndex]) {
+      expanded = false;
+    } else {
+      expanded = true;
+    }
     this.setState({
-      expanded: {
-        [index[0]]: !this.state.expanded[index[0]]
-      }
+      expanded: { [row.viewIndex]: expanded }
     });
   }
   render() {
@@ -186,9 +190,21 @@ export default class SearchResult extends Component {
           defaultPageSize={this.props.routes.length}
           getTrProps={this.onRowClick}
           expanded={this.state.expanded}
-          onExpandedChange={(newExpanded, index, event) =>
-            this.handleRowExpanded(newExpanded, index, event)
-          }
+          getTdProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                this.expandRow(rowInfo);
+              }
+            };
+          }}
+          getTheadThProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                instance.sortColumn(column);
+                this.setState({ expanded: false });
+              }
+            };
+          }}
           SubComponent={row => {
             return (
               <ReactTable
