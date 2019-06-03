@@ -3,11 +3,15 @@ import "./Css/App.css";
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
+import "./Css/Toolbar.css";
 import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
+import Toolbar from "./Components/Toolbar";
+import Sidebar from "./Components/Sidebar";
+import Backdrop from "./Components/Backdrop";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
@@ -21,7 +25,8 @@ class App extends Component {
       places: [],
       tableData: [],
       showResult: false,
-      currencyCode: ""
+      currencyCode: "",
+      sideDrawerOpen: false
     };
   }
 
@@ -81,15 +86,41 @@ class App extends Component {
     this.setState({ tableData: newData });
   };
 
+  drawerToggleClickHandler = () => {
+    this.setState(prevState => {
+      return { sideDrawerOpen: !prevState.sideDrawerOpen };
+    });
+  };
+
+  backdropClickHandler = () => {
+    this.setState({ sideDrawerOpen: false });
+  };
+
   render() {
+    let backdrop;
+
+    if (this.state.sideDrawerOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
+
     return (
       <div className="App">
-        <Title />
-        <Navbar />
         {this.state.showResult ? (
-          <SearchTrip doSearch={this.doSearch} />
+          <React.Fragment>
+            <Title />
+            <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+            <Sidebar
+              show={this.state.sideDrawerOpen}
+              doSearch={this.doSearch}
+            />
+            {backdrop}
+          </React.Fragment>
         ) : (
-          <Inspiration />
+          <React.Fragment>
+            <Title />
+            <Navbar />
+            <Inspiration />
+          </React.Fragment>
         )}
         {this.state.showResult ? (
           <SearchResult
