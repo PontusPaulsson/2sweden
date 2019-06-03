@@ -1,0 +1,16 @@
+.schedule-table {
+    max-width: 100%;
+    background-color: #006699;
+    color: #ffcc00;
+    font-size: 2.7vh;
+    font-weight: bold;
+    border: 3vh solid #006699;
+    border-radius: 1.5vh;
+    text-align: center;
+    margin-right: 0.8vw;
+    margin-left: 0.8vw;
+    box-shadow: 0 0 0 0.3vh black;
+    margin-bottom: 1.5vh;
+    flex-grow: 1;
+
+  }

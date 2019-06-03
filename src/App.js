@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Css/App.css";
+import "./Css/Schedule.css"
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
