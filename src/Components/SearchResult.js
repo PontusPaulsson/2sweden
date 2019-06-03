@@ -9,7 +9,10 @@ const resultColumns = [
   },
   {
     Header: "Time",
-    accessor: "time"
+    accessor: "time",
+    sortMethod: (a, b) => {
+      return Number(a.match(/(\d+)/g)[0]) - Number(b.match(/(\d+)/g)[0]);
+    }
     // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
   },
   {

@@ -14,24 +14,28 @@
   box-shadow: 0 0 0 0.3vh black;
   flex-grow: 1;
   overflow: hidden;
-  max-height: 55vh;
   text-shadow: none;
   width: 50vw;
 }
 .result-subtable {
   background-color: #ffcc00;
   color: #006699;
-  max-width: 50vw;
   box-shadow: 0 0 0 0.3vh black;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  border-radius: 1vh;
 }
 .result-container {
   display: flex;
   flex-direction: row;
   margin-top: 1.5vh;
-  height: 56.5vh;
+  height: 58.5vh;
 }
 .map {
   width: 50vw;
+  height: 58.5vh;
   border-radius: 1.5vh;
   box-shadow: 0 0 0 0.3vh black;
   overflow: hidden;
@@ -84,7 +88,9 @@
   color: transparent;
   content: ".";
 }
-
+.ReactTable .rt-th {
+  border-bottom: 0.3vh solid black;
+}
 .ReactTable .rt-th.-sort-asc .rt-resizer:before {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAgMTVWNmw0IDQgMS0xLTYtNi02IDYgMSAxIDQtNHY5eiIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==);
 }
