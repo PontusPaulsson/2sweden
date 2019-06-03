@@ -3,8 +3,8 @@
     padding: 0;
     background-color: transparent;
     box-shadow: none;
-    margin-top: 1.5vh;
-    margin-left: 0;
+    margin: auto;
+    padding-top: 4vw;
   }
   .from-to-container {
     flex-direction: column;
@@ -16,7 +16,7 @@
     box-shadow: none;
   }
   .header-container {
-    font-size: 5vh;
+    font-size: 4vh;
     margin-top: 0;
     padding-top: 0;
   }
@@ -31,14 +31,14 @@
   }
   .input {
     margin-bottom: 2vh;
-    width: 90vw;
+    width: 60vw;
     margin-left: 5vw;
     margin-right: 5vw;
     opacity: 0.8;
     font-weight: bold;
   }
   .search {
-    width: 90vw;
+    width: 60vw;
     margin-left: 5vw;
     margin-right: 5vw;
     font-size: 3vh;
@@ -108,7 +108,7 @@
     flex-grow: 0;
   }
   .map {
-    height: 35vh;
+    height: 40vh;
     width: 94vw;
     margin-right: 1vw;
     margin-left: 1vw;
