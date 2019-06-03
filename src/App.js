@@ -4,10 +4,11 @@ import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
 import { Title } from "./Components/Title";
-import { Navbar } from "./Components/Navbar";
+import Navbar from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
+import OlympicSchedule from './Components/OlympicSchedule'
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
@@ -21,7 +22,8 @@ class App extends Component {
       places: [],
       tableData: [],
       showResult: false,
-      currencyCode: ""
+      currencyCode: "",
+      showSchedule: false
     };
   }
 
@@ -33,11 +35,15 @@ class App extends Component {
       });
   };
 
+  showSchedule = () => {
+    this.setState({ showSchedule: true })
+  }
+
   doSearch = (from, to) => {
     if (from) {
       fetch(
         `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
-          this.state.currencyCode
+        this.state.currencyCode
         }`
       )
         .then(response => response.json())
@@ -85,12 +91,12 @@ class App extends Component {
     return (
       <div className="App">
         <Title />
-        <Navbar />
+        <Navbar showSchedule={this.showSchedule} />
         {this.state.showResult ? (
           <SearchTrip doSearch={this.doSearch} />
-        ) : (
-          <Inspiration />
-        )}
+        ) : this.state.showSchedule ? (
+          <OlympicSchedule />
+        ) : <Inspiration />}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
@@ -98,9 +104,9 @@ class App extends Component {
             places={this.state.places}
             tableData={this.state.tableData}
           />
-        ) : (
-          <SearchTrip doSearch={this.doSearch} />
-        )}
+        ) : this.state.showSchedule ? null :(
+            <SearchTrip doSearch={this.doSearch} />
+          )}
       </div>
     );
   }
