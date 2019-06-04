@@ -98,12 +98,40 @@ body {
   margin-left: 1.5vw;
   margin-right: 1.5vw;
 }
-.bamse {
-  animation: walk infinite 20s linear;
+.bamse-head {
+  height: 30vh;
+  transition: all 1.5s;
+}
+.bamse-container {
+  position: fixed;
+  bottom: -24vh;
+  height: 30vh;
+  width: 30vh;
+  left: 86.5%;
+}
+.bamse-container:hover .bamse-head {
+  transform: translateY(-22.5vh);
+}
+.bamse-container:hover .bamse-right {
+  animation: walk-right infinite 20s linear;
+}
+.bamse-container:hover .bamse-left {
+  animation: walk-left infinite 20s linear;
+}
+.bamse-right {
   position: fixed;
   bottom: 0;
+  left: -10%;
   height: 25vh;
 }
+.bamse-left {
+  position: fixed;
+  bottom: 0;
+  left: 350%;
+  transform: rotateY(180deg);
+  height: 25vh;
+}
+
 .logo {
   animation: spin infinite 15s linear;
   margin-right: 0.2vw;
@@ -147,11 +175,19 @@ body {
     width: 100%;
   }
 }
-@keyframes walk {
+@keyframes walk-right {
   0% {
-    left: -50%;
+    left: -30%;
   }
   100% {
-    left: 200%;
+    left: 230%;
+  }
+}
+@keyframes walk-left {
+  0% {
+    left: 250%;
+  }
+  100% {
+    left: -10%;
   }
 }

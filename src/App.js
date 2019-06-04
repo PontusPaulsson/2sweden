@@ -102,7 +102,7 @@ class App extends Component {
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}
-        <Bamse />
+        {this.state.showResult ? null : <Bamse />}
       </div>
     );
   }
