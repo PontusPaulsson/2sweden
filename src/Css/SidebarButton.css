@@ -1,0 +1,23 @@
+.sidebar-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 24px;
+  width: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.sidebar-button:focus {
+  outline: none;
+}
+
+.sidebar-button-line {
+  width: 30px;
+  height: 3px;
+  background: #006699;
+  box-shadow: 0 0 0 0.1vh black;
+}

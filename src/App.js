@@ -4,12 +4,17 @@ import "./Css/Schedule.css"
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
+import "./Css/Toolbar.css";
 import { Title } from "./Components/Title";
 import Navbar from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
+import { Bamse } from "./Components/Bamse";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
 import OlympicSchedule from './Components/OlympicSchedule'
+import Toolbar from "./Components/Toolbar";
+import Sidebar from "./Components/Sidebar";
+import Backdrop from "./Components/Backdrop";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
@@ -24,7 +29,8 @@ class App extends Component {
       tableData: [],
       showResult: false,
       currencyCode: "",
-      showSchedule: false
+      showSchedule: false,
+      sidebarOpen: false
     };
   }
 
@@ -61,6 +67,9 @@ class App extends Component {
           console.log(error);
           this.setState({ showResult: false });
         });
+
+      // när vi klickar på search-knappen stängs sidebaren
+      this.setState({ sidebarOpen: false });
     }
   };
 
@@ -88,7 +97,23 @@ class App extends Component {
     this.setState({ tableData: newData });
   };
 
+  // denna funktion öppnar sidebaren när man klickar på menu-knappen
+  sidebarClickHandler = () => {
+    this.setState({ sidebarOpen: true });
+  };
+
+  // denna funktion stänger sidebaren när man klickar på backdropen
+  backdropClickHandler = () => {
+    this.setState({ sidebarOpen: false });
+  };
+
   render() {
+    // detta rendrar backdropen när sidebaren är öppen (true)
+    let backdrop;
+    if (this.state.sidebarOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
+
     return (
       <div className="App">
         <Title />
@@ -99,6 +124,27 @@ class App extends Component {
           <OlympicSchedule />
         ) : <Inspiration />}
         {this.state.showResult ? (
+          <React.Fragment>
+            <Title />
+            <div className="mobile-sidebar-open">
+              <Navbar />
+              <SearchTrip doSearch={this.doSearch} />
+            </div>
+            <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
+            <Sidebar
+              sidebarOpen={this.state.sidebarOpen}
+              doSearch={this.doSearch}
+            />
+            {backdrop}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <Title />
+            <Navbar />
+            <Inspiration />
+          </React.Fragment>
+        )}
+        {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
             vehicles={this.state.vehicles}
@@ -108,6 +154,10 @@ class App extends Component {
         ) : this.state.showSchedule ? null :(
             <SearchTrip doSearch={this.doSearch} />
           )}
+        ) : (
+          <SearchTrip doSearch={this.doSearch} />
+        )}
+        {this.state.showResult ? null : <Bamse />}
       </div>
     );
   }
