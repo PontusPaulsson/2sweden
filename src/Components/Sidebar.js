@@ -1,6 +1,6 @@
 import React from "react";
 import SearchTrip from "./SearchTrip";
-import { Navbar } from "./Navbar";
+import Navbar from "./Navbar";
 import { Title } from "./Title";
 import "../Css/Sidebar.css";
 import Hej from "../img/hej.png";

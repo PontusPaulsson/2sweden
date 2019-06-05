@@ -119,16 +119,9 @@ class App extends Component {
         <Title />
         <Navbar showSchedule={this.showSchedule} />
         {this.state.showResult ? (
-          <SearchTrip doSearch={this.doSearch} />
-        ) : this.state.showSchedule ? (
-          <OlympicSchedule />
-        ) : <Inspiration />}
-        {this.state.showResult ? (
           <React.Fragment>
-            <Title />
+            <SearchTrip doSearch={this.doSearch} />
             <div className="mobile-sidebar-open">
-              <Navbar />
-              <SearchTrip doSearch={this.doSearch} />
             </div>
             <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
             <Sidebar
@@ -137,13 +130,9 @@ class App extends Component {
             />
             {backdrop}
           </React.Fragment>
-        ) : (
-          <React.Fragment>
-            <Title />
-            <Navbar />
-            <Inspiration />
-          </React.Fragment>
-        )}
+        ) : this.state.showSchedule ? (
+          <OlympicSchedule />
+        ) : <Inspiration />}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
@@ -151,10 +140,7 @@ class App extends Component {
             places={this.state.places}
             tableData={this.state.tableData}
           />
-        ) : this.state.showSchedule ? null :(
-            <SearchTrip doSearch={this.doSearch} />
-          )}
-        ) : (
+        ) : this.state.showSchedule ? null : (
           <SearchTrip doSearch={this.doSearch} />
         )}
         {this.state.showResult ? null : <Bamse />}
