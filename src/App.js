@@ -5,6 +5,7 @@ import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
 import "./Css/Toolbar.css";
+import "./Css/Toggle.css";
 import { Title } from "./Components/Title";
 import Navbar from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
@@ -131,19 +132,19 @@ class App extends Component {
             {backdrop}
           </React.Fragment>
         ) : this.state.showSchedule ? (
-          <React.Fragment>
-            <Title />
-            <Navbar />
-            <OlympicSchedule />
-          </React.Fragment>
+            <React.Fragment>
+              <Title />
+              <Navbar />
+              <OlympicSchedule />
+            </React.Fragment>
+
         ) : (
-          <React.Fragment>
-            <Title />
-            <Navbar showSchedule={this.showSchedule} />
-            <Inspiration />
-            <Bamse />
-          </React.Fragment>
-        )}
+              <React.Fragment>
+                <Title />
+                <Navbar showSchedule={this.showSchedule}  />
+                <Inspiration />
+                <Bamse />
+              </React.Fragment>)}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
