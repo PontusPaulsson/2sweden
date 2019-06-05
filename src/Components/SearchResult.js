@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import MapContainer from "./MapContainer";
+
 const resultColumns = [
   {
     Header: "Transport",

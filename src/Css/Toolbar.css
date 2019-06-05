@@ -32,7 +32,11 @@
   }
 }
 
-@media (min-width: 769) {
+@media (min-width: 769px) {
+  .toolbar {
+    display: none;
+  }
+
   .toolbar-button {
     display: none;
   }
