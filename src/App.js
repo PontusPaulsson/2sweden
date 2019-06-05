@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./Css/App.css";
-import "./Css/Schedule.css"
+import "./Css/Schedule.css";
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
@@ -11,7 +11,7 @@ import { Inspiration } from "./Components/Inspiration";
 import { Bamse } from "./Components/Bamse";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
-import OlympicSchedule from './Components/OlympicSchedule'
+import OlympicSchedule from "./Components/OlympicSchedule";
 import Toolbar from "./Components/Toolbar";
 import Sidebar from "./Components/Sidebar";
 import Backdrop from "./Components/Backdrop";
@@ -43,14 +43,14 @@ class App extends Component {
   };
 
   showSchedule = () => {
-    this.setState({ showSchedule: true })
-  }
+    this.setState({ showSchedule: true });
+  };
 
   doSearch = (from, to) => {
     if (from) {
       fetch(
         `${base}Search?key=${apiKey}&oName=${from}&dName=${to}&currencyCode=${
-        this.state.currencyCode
+          this.state.currencyCode
         }`
       )
         .then(response => response.json())
@@ -116,8 +116,6 @@ class App extends Component {
 
     return (
       <div className="App">
-
-
         {this.state.showResult ? (
           <React.Fragment>
             <Title />
@@ -133,18 +131,19 @@ class App extends Component {
             {backdrop}
           </React.Fragment>
         ) : this.state.showSchedule ? (
-            <React.Fragment>
-              <Title />
-              <Navbar />
-              <OlympicSchedule />
-            </React.Fragment>
-
+          <React.Fragment>
+            <Title />
+            <Navbar />
+            <OlympicSchedule />
+          </React.Fragment>
         ) : (
-              <React.Fragment>
-                <Title />
-                <Navbar showSchedule={this.showSchedule}  />
-                <Inspiration />
-              </React.Fragment>)}
+          <React.Fragment>
+            <Title />
+            <Navbar showSchedule={this.showSchedule} />
+            <Inspiration />
+            <Bamse />
+          </React.Fragment>
+        )}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
@@ -155,7 +154,6 @@ class App extends Component {
         ) : this.state.showSchedule ? null : (
           <SearchTrip doSearch={this.doSearch} />
         )}
-        {this.state.showResult ? null : <Bamse />}
       </div>
     );
   }
