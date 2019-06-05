@@ -18,12 +18,35 @@ import curling from '../img/curling.png'
 import freestyle from '../img/freestyle.png'
 import biathlon from '../img/biathlon.png'
 import torch from '../img/torch.png'
+import Toggle from '../Components/Toggle'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 
 class OlympicSchedule extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            data: ''
+            data: [],
+            options: ['All cities', 'Åre', 'Stockholm', 'Falun'],
+            medalData: [],
+            toggleMedal: true
+
+
+        }
+
+    }
+
+    componentDidMount() {
+        this.setState({ data: scheduleData })
+    }
+
+    generateData = () => {
+        console.log(this.state.toggleMedal)
+        if (this.state.toggleMedal) {
+            console.log(this.state.data)
+            console.log(this.state.medalData)
+            this.setState({ data: this.state.medalData })
+            this.setState({ toggleMedal: !this.state.toggleMedal })
         }
     }
 
@@ -69,6 +92,136 @@ class OlympicSchedule extends Component {
         } else {
             return ''
         }
+    }
+
+    toggleMedals = () => {
+        let array = []
+
+        for (let i = 0; i < scheduleData.length; i++) {
+            let obj = {}
+
+            for (let props in scheduleData[i]) {
+                if (props === 'sport') {
+                    obj.sport = scheduleData[i][props]
+                }
+                if (props === 'city') {
+                    obj.city = scheduleData[i][props]
+                }
+                if (scheduleData[i][props] === 'MM') {
+                    const day = props
+                    obj[day] = 'MM'
+
+                }
+                if (scheduleData[i][props] === 'XM') {
+                    const day = props
+                    obj[day] = 'XM'
+
+                }
+                if (scheduleData[i][props] === 'OM') {
+                    const day = props
+                    obj[day] = 'OM'
+                }
+            }
+
+            if (Object.keys(obj).length > 2) {
+                array.push(obj)
+            }
+
+        }
+        console.log(array)
+        this.setState({ medalData: array })
+        
+        this.generateData()
+
+    }
+
+    toggleMen = () => {
+        let array = []
+
+        for (let i = 0; i < this.state.data.length; i++) {
+            let obj = {}
+            for (let props in this.state.data[i]) {
+                if (props === 'sport') {
+                    obj.sport = this.state.data[i][props]
+                }
+                if (props === 'city') {
+                    obj.city = this.state.data[i][props]
+                }
+                if (this.state.data[i][props] === 'X') {
+                    const day = props
+                    obj[day] = 'X'
+
+                }
+                if (this.state.data[i][props] === 'XM') {
+                    const day = props
+                    obj[day] = 'XM'
+
+                }
+                if (this.state.data[i][props] === 'MM') {
+                    const day = props
+                    obj[day] = 'MM'
+                }
+            }
+            if (Object.keys(obj).length > 2) {
+                array.push(obj)
+            }
+
+
+        }
+
+        this.setState({ data: array })
+
+    }
+
+    toggleWomen = () => {
+        let array = []
+
+        for (let i = 0; i < this.state.data.length; i++) {
+            let obj = {}
+            for (let props in this.state.data[i]) {
+                if (props === 'sport') {
+                    obj.sport = this.state.data[i][props]
+                }
+                if (props === 'city') {
+                    obj.city = this.state.data[i][props]
+                }
+                if (this.state.data[i][props] === 'O') {
+                    const day = props
+                    obj[day] = 'O'
+
+                }
+                if (this.state.data[i][props] === 'OM') {
+                    const day = props
+                    obj[day] = 'OM'
+
+                }
+                if (this.state.data[i][props] === 'MM') {
+                    const day = props
+                    obj[day] = 'MM'
+                }
+            }
+            if (Object.keys(obj).length > 2) {
+                array.push(obj)
+            }
+
+
+        }
+
+        this.setState({ data: array })
+
+    }
+
+    onSelectCity = (event) => {
+
+        if (event.value === 'All cities') {
+            this.setState({ data: scheduleData })
+        } else {
+            let array = scheduleData.filter(sport => sport.city === event.value)
+            this.setState({ data: array })
+        }
+
+
+
     }
 
     render() {
@@ -139,11 +292,15 @@ class OlympicSchedule extends Component {
 
         return (
             <div>
-                <ReactTable data={scheduleData} className='schedule-table'
+                <Dropdown options={this.state.options} onChange={this.onSelectCity} placeholder='Select city' className='schedule-table' />
+                <Toggle toggle={this.toggleMedals} />
+                <Toggle toggle={this.toggleMen} />
+                <Toggle toggle={this.toggleWomen} />
+                <ReactTable data={this.state.data} className='schedule-table'
                     columns={columns}
                     showPagination={false}
                     sortable={false}
-                    pageSize={scheduleData.length} />
+                    pageSize={this.state.data.length} />
             </div>
         )
     }
