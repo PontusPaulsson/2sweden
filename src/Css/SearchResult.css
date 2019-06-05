@@ -2,7 +2,6 @@
   box-sizing: border-box;
 }
 .result-table {
-  max-width: 100%;
   background-color: #006699;
   color: #ffcc00;
   font-size: 2.7vh;
@@ -13,23 +12,30 @@
   margin-right: 0.8vw;
   margin-left: 0.8vw;
   box-shadow: 0 0 0 0.3vh black;
-  margin-bottom: 1.5vh;
   flex-grow: 1;
-  max-height: 27vh;
+  overflow: hidden;
+  text-shadow: none;
+  width: 50vw;
+}
+.result-subtable {
+  background-color: #ffcc00;
+  color: #006699;
+  box-shadow: 0 0 0 0.3vh black;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  border-radius: 1vh;
 }
 .result-container {
   display: flex;
   flex-direction: row;
   margin-top: 1.5vh;
-  height: 56.5vh;
-}
-.result-table-container {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
+  height: 58.5vh;
 }
 .map {
-  width: 100%;
+  width: 50vw;
+  height: 58.5vh;
   border-radius: 1.5vh;
   box-shadow: 0 0 0 0.3vh black;
   overflow: hidden;
@@ -82,11 +88,30 @@
   color: transparent;
   content: ".";
 }
-
+.ReactTable .rt-th {
+  border-bottom: 0.3vh solid black;
+}
 .ReactTable .rt-th.-sort-asc .rt-resizer:before {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTAgMTVWNmw0IDQgMS0xLTYtNi02IDYgMSAxIDQtNHY5eiIgZmlsbD0iIzMzMyIvPjwvc3ZnPg==);
 }
 
 .ReactTable .rt-th.-sort-desc .rt-resizer:before {
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNOCAzdjkuMTNMNCA4IDMgOWw2IDYgNi02LTEtMS00IDQuMTNWM3oiIGZpbGw9IiMzMzMiLz48L3N2Zz4=);
+}
+.result-dropdown {
+  list-style: none;
+  padding: 1vh;
+  cursor: pointer;
+  display: none;
+  position: absolute;
+  border-radius: 1.5vh;
+  opacity: 0.9;
+  margin-top: 0.5vh;
+}
+.rt-tr:hover .rt-td .result-dropdown {
+  display: block;
+}
+.ReactTable .rt-th,
+.ReactTable .rt-td {
+  overflow: visible;
 }

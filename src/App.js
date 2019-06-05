@@ -7,6 +7,7 @@ import "./Css/Toolbar.css";
 import { Title } from "./Components/Title";
 import { Navbar } from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
+import { Bamse } from "./Components/Bamse";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
 import Toolbar from "./Components/Toolbar";
@@ -139,6 +140,7 @@ class App extends Component {
         ) : (
           <SearchTrip doSearch={this.doSearch} />
         )}
+        {this.state.showResult ? null : <Bamse />}
       </div>
     );
   }
