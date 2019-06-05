@@ -5,15 +5,20 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 70%;
-  max-width: 400px;
+  width: 80%;
   z-index: 200;
+  /* detta gör så att sidebarens position flyttas hela vägen till vänster, om sidebaren är stängd/false */
   transform: translateX(-100%);
-  transition: transform 0.3s ease-out;
+  transition: transform 0.4s ease-out;
 }
 
+/* detta gör så att sidebaren har sin default position (om sidbaren är öppen/true) */
 .sidebar.open {
   transform: translateX(0);
+}
+
+.hej {
+  width: 300px;
 }
 
 @media (min-width: 769px) {

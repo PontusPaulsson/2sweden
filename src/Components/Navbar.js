@@ -2,7 +2,7 @@ import React from "react";
 
 export const Navbar = () => {
   return (
-    <nav data-test="nav-bar-container">
+    <nav data-test="nav-bar-container" className="nav-bar-container">
       <ul className="nav-list">
         <li className="nav-item">Search Transport</li>
         <li className="nav-item">About the Event</li>

@@ -6,10 +6,10 @@ const toolbar = props => (
   <header className="toolbar">
     <nav className="toolbar-navigation">
       <div className="toolbar-button">
-        <SidebarButton click={props.drawerClickHandler} />
+        <SidebarButton click={props.sidebarClickHandler} />
       </div>
       <div className="toolbar-menu">
-        <span>Menu</span>
+        <span>Menu/New Search</span>
       </div>
       <div className="spacer" />
       <div className="toolbar-items" />

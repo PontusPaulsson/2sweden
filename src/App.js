@@ -26,7 +26,7 @@ class App extends Component {
       tableData: [],
       showResult: false,
       currencyCode: "",
-      sideDrawerOpen: false
+      sidebarOpen: false
     };
   }
 
@@ -59,6 +59,9 @@ class App extends Component {
           console.log(error);
           this.setState({ showResult: false });
         });
+
+      // när vi klickar på search-knappen stängs sidebaren
+      this.setState({ sidebarOpen: false });
     }
   };
 
@@ -86,20 +89,20 @@ class App extends Component {
     this.setState({ tableData: newData });
   };
 
-  drawerToggleClickHandler = () => {
-    this.setState(prevState => {
-      return { sideDrawerOpen: !prevState.sideDrawerOpen };
-    });
+  // denna funktion öppnar sidebaren när man klickar på menu-knappen
+  sidebarClickHandler = () => {
+    this.setState({ sidebarOpen: true });
   };
 
+  // denna funktion stänger sidebaren när man klickar på backdropen
   backdropClickHandler = () => {
-    this.setState({ sideDrawerOpen: false });
+    this.setState({ sidebarOpen: false });
   };
 
   render() {
+    // detta rendrar backdropen när sidebaren är öppen (true)
     let backdrop;
-
-    if (this.state.sideDrawerOpen) {
+    if (this.state.sidebarOpen) {
       backdrop = <Backdrop click={this.backdropClickHandler} />;
     }
 
@@ -108,9 +111,13 @@ class App extends Component {
         {this.state.showResult ? (
           <React.Fragment>
             <Title />
-            <Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+            <div className="mobile-sidebar-open">
+              <Navbar />
+              <SearchTrip doSearch={this.doSearch} />
+            </div>
+            <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
             <Sidebar
-              show={this.state.sideDrawerOpen}
+              sidebarOpen={this.state.sidebarOpen}
               doSearch={this.doSearch}
             />
             {backdrop}
