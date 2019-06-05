@@ -116,12 +116,15 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Title />
-        <Navbar showSchedule={this.showSchedule} />
+
+
         {this.state.showResult ? (
           <React.Fragment>
-            <SearchTrip doSearch={this.doSearch} />
+            <Title />
             <div className="mobile-sidebar-open">
+              <Navbar showSchedule={this.showSchedule} />
+              <SearchTrip doSearch={this.doSearch} />
+
             </div>
             <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
             <Sidebar
@@ -132,7 +135,12 @@ class App extends Component {
           </React.Fragment>
         ) : this.state.showSchedule ? (
           <OlympicSchedule />
-        ) : <Inspiration />}
+        ) : (
+              <React.Fragment>
+                <Title />
+                <Navbar />
+                <Inspiration />
+              </React.Fragment>)}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
