@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import { scheduleData } from '../Data/OlympicScheduleData'
+import {scheduleData} from '../Data/OlympicScheduleData'
+import Toggle from '../Components/Toggle'
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 import goldMedalMen from '../img/gold-medal2.png'
 import goldMedalWomen from '../img/gold-medal.png'
 import femaleSymbol from '../img/woman.png'
@@ -18,9 +21,6 @@ import curling from '../img/curling.png'
 import freestyle from '../img/freestyle.png'
 import biathlon from '../img/biathlon.png'
 import torch from '../img/torch.png'
-import Toggle from '../Components/Toggle'
-import Dropdown from 'react-dropdown'
-import 'react-dropdown/style.css'
 
 class OlympicSchedule extends Component {
     constructor(props) {
@@ -29,48 +29,110 @@ class OlympicSchedule extends Component {
             data: [],
             options: ['All cities', 'Åre', 'Stockholm', 'Falun'],
             medalData: [],
-            toggleMedal: true
-
-
+            toggleMedal: false,
+            åreData: [],
+            falunData: [],
+            stockholmData: [],
+            toggleFalun: false,
+            toggleStockholm: false,
+            toggleÅre: false,
+            selectedCity: 'Select a city'
         }
 
     }
+
+    columns = [{
+        Header: 'Sport',
+        accessor: 'sport', width: 150
+    }, {
+        Header: '',
+        accessor: 'sport', width: 40,
+        Cell: row => this.generateSport(row.original.sport)
+    }, {
+        Header: 'City',
+        accessor: 'city', width: 150
+    }, {
+        Header: '7th',
+        accessor: 'day1',
+        Cell: row => this.generateSymbol(row.original.day1)
+    }, {
+        Header: '8th',
+        accessor: 'day2',
+        Cell: row => this.generateSymbol(row.original.day2)
+    }, {
+        Header: '9th',
+        accessor: 'day3',
+        Cell: row => this.generateSymbol(row.original.day3)
+    }, {
+        Header: '10th',
+        accessor: 'day4',
+        Cell: row => this.generateSymbol(row.original.day4)
+    }, {
+        Header: '11th',
+        accessor: 'day5',
+        Cell: row => this.generateSymbol(row.original.day5)
+    }, {
+        Header: '12th ',
+        accessor: 'day6',
+        Cell: row => this.generateSymbol(row.original.day6)
+    }, {
+        Header: '13th',
+        accessor: 'day7',
+        Cell: row => this.generateSymbol(row.original.day7)
+    }, {
+        Header: '14th',
+        accessor: 'day8',
+        Cell: row => this.generateSymbol(row.original.day8)
+    }, {
+        Header: '15th',
+        accessor: 'day9',
+        Cell: row => this.generateSymbol(row.original.day9)
+    }, {
+        Header: '16th',
+        accessor: 'day10',
+        Cell: row => this.generateSymbol(row.original.day10)
+    }, {
+        Header: '17th',
+        accessor: 'day11',
+        Cell: row => this.generateSymbol(row.original.day11)
+    }, {
+        Header: '18th',
+        accessor: 'day12',
+        Cell: row => this.generateSymbol(row.original.day12)
+    }, {
+        Header: '19th',
+        accessor: 'day13',
+        Cell: row => this.generateSymbol(row.original.day13)
+    }
+    ]
 
     componentDidMount() {
-        this.setState({ data: scheduleData })
-    }
-
-    generateData = () => {
-        console.log(this.state.toggleMedal)
-        if (this.state.toggleMedal) {
-            console.log(this.state.data)
-            console.log(this.state.medalData)
-            this.setState({ data: this.state.medalData })
-            this.setState({ toggleMedal: !this.state.toggleMedal })
-        }
+        this.setState({data: scheduleData});
+        this.generateCityData(scheduleData);
+        this.generateMedalData(scheduleData);
     }
 
     generateSport(sport) {
         if (sport === 'Alpine Skiing') {
-            return <div><img height={34} src={alpine} /></div>
+            return <div><img height={34} src={alpine}/></div>
         } else if (sport === 'Ice Hockey') {
-            return <div><img height={34} src={hockey} /></div>
+            return <div><img height={34} src={hockey}/></div>
         } else if (sport === 'Figure Skating') {
-            return <div><img height={34} src={figure} /></div>
+            return <div><img height={34} src={figure}/></div>
         } else if (sport === 'Ski Jumping') {
-            return <div><img height={34} src={skiJump} /></div>
+            return <div><img height={34} src={skiJump}/></div>
         } else if (sport === 'Snowboard') {
-            return <div><img height={34} src={snowboard} /></div>
+            return <div><img height={34} src={snowboard}/></div>
         } else if (sport === 'Curling') {
-            return <div><img height={34} src={curling} /></div>
+            return <div><img height={34} src={curling}/></div>
         } else if (sport === 'Speed Skating') {
-            return <div><img height={34} src={speedskate} /></div>
+            return <div><img height={34} src={speedskate}/></div>
         } else if (sport === 'Freestyle Skiing') {
-            return <div><img height={34} src={freestyle} /></div>
+            return <div><img height={34} src={freestyle}/></div>
         } else if (sport === 'Biathlon') {
-            return <div><img height={34} src={biathlon} /></div>
+            return <div><img height={34} src={biathlon}/></div>
         } else if (sport === 'Ceremonies') {
-            return <div><img height={34} src={torch} /></div>
+            return <div><img height={34} src={torch}/></div>
         } else {
             return ''
         }
@@ -78,229 +140,130 @@ class OlympicSchedule extends Component {
 
     generateSymbol(day) {
         if (day === 'X') {
-            return <div><img height={34} src={maleSymbol} /></div>
+            return <div><img height={34} src={maleSymbol}/></div>
         } else if (day === 'O') {
-            return <div><img height={34} src={femaleSymbol} /></div>
+            return <div><img height={34} src={femaleSymbol}/></div>
         } else if (day === 'MM') {
-            return <div><img height={34} src={goldMedals} /></div>
+            return <div><img height={34} src={goldMedals}/></div>
         } else if (day === 'XM') {
-            return <div><img height={34} src={goldMedalMen} /></div>
+            return <div><img height={34} src={goldMedalMen}/></div>
         } else if (day === 'OM') {
-            return <div><img height={34} src={goldMedalWomen} /></div>
+            return <div><img height={34} src={goldMedalWomen}/></div>
         } else if (day === 'XO') {
-            return <div><img height={34} src={genderSymbol} /></div>
+            return <div><img height={34} src={genderSymbol}/></div>
         } else {
             return ''
         }
     }
 
-    toggleMedals = () => {
+    toggleData = () => {
+        this.setState({toggleMedal: !this.state.toggleMedal, toggleMen: !this.state.toggleMen}, () => {
+            if (this.state.toggleMedal) {
+                this.setState({data: this.generateMedalData(this.state.data)})
+            } else if (!this.state.toggleMedal && this.state.toggleStockholm) {
+                this.setState({data: this.state.stockholmData});
+            } else if (this.state.toggleMedal && this.state.toggleFalun) {
+                this.setState({data: this.generateMedalData(this.state.falunData)})
+            } else if (!this.state.toggleMedal && this.state.toggleFalun) {
+                this.setState({data: this.state.falunData});
+            } else if (this.state.toggleMedal && this.state.toggleÅre) {
+                this.setState({data: this.generateMedalData(this.state.åreData)})
+            } else if (!this.state.toggleMedal && this.state.toggleÅre) {
+                this.setState({data: this.state.åreData});
+            } else if (!this.state.toggleStockholm && !this.state.toggleFalun && !this.state.toggleÅre) {
+                this.setState({data: scheduleData})
+            }
+        })
+    }
+
+    generateMedalData = (data) => {
         let array = []
-
-        for (let i = 0; i < scheduleData.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             let obj = {}
-
-            for (let props in scheduleData[i]) {
+            for (let props in data[i]) {
                 if (props === 'sport') {
-                    obj.sport = scheduleData[i][props]
+                    obj.sport = data[i][props]
                 }
                 if (props === 'city') {
-                    obj.city = scheduleData[i][props]
+                    obj.city = data[i][props]
                 }
-                if (scheduleData[i][props] === 'MM') {
+                if (data[i][props] === 'MM') {
                     const day = props
                     obj[day] = 'MM'
 
                 }
-                if (scheduleData[i][props] === 'XM') {
+                if (data[i][props] === 'XM') {
                     const day = props
                     obj[day] = 'XM'
 
                 }
-                if (scheduleData[i][props] === 'OM') {
+                if (data[i][props] === 'OM') {
                     const day = props
                     obj[day] = 'OM'
                 }
             }
-
             if (Object.keys(obj).length > 2) {
                 array.push(obj)
             }
-
         }
-        console.log(array)
-        this.setState({ medalData: array })
-        
-        this.generateData()
-
+        this.setState({medalData: array});
+        return array;
     }
 
-    toggleMen = () => {
-        let array = []
+    generateCityData = (data) => {
+        let stockholm = data.filter(sport => sport.city === 'Stockholm');
+        this.setState({stockholmData: stockholm})
 
-        for (let i = 0; i < this.state.data.length; i++) {
-            let obj = {}
-            for (let props in this.state.data[i]) {
-                if (props === 'sport') {
-                    obj.sport = this.state.data[i][props]
-                }
-                if (props === 'city') {
-                    obj.city = this.state.data[i][props]
-                }
-                if (this.state.data[i][props] === 'X') {
-                    const day = props
-                    obj[day] = 'X'
+        let åre = data.filter(sport => sport.city === 'Åre');
+        this.setState({åreData: åre})
 
-                }
-                if (this.state.data[i][props] === 'XM') {
-                    const day = props
-                    obj[day] = 'XM'
-
-                }
-                if (this.state.data[i][props] === 'MM') {
-                    const day = props
-                    obj[day] = 'MM'
-                }
-            }
-            if (Object.keys(obj).length > 2) {
-                array.push(obj)
-            }
-
-
-        }
-
-        this.setState({ data: array })
-
-    }
-
-    toggleWomen = () => {
-        let array = []
-
-        for (let i = 0; i < this.state.data.length; i++) {
-            let obj = {}
-            for (let props in this.state.data[i]) {
-                if (props === 'sport') {
-                    obj.sport = this.state.data[i][props]
-                }
-                if (props === 'city') {
-                    obj.city = this.state.data[i][props]
-                }
-                if (this.state.data[i][props] === 'O') {
-                    const day = props
-                    obj[day] = 'O'
-
-                }
-                if (this.state.data[i][props] === 'OM') {
-                    const day = props
-                    obj[day] = 'OM'
-
-                }
-                if (this.state.data[i][props] === 'MM') {
-                    const day = props
-                    obj[day] = 'MM'
-                }
-            }
-            if (Object.keys(obj).length > 2) {
-                array.push(obj)
-            }
-
-
-        }
-
-        this.setState({ data: array })
-
+        let falun = data.filter(sport => sport.city === 'Falun');
+        this.setState({falunData: falun})
     }
 
     onSelectCity = (event) => {
-
-        if (event.value === 'All cities') {
-            this.setState({ data: scheduleData })
+        if (event.value === 'Stockholm') {
+            this.setState({toggleStockholm: true, toggleFalun: false, toggleÅre: false}, () => {
+                this.setState({data: this.state.stockholmData, selectedCity: 'Stockholm'});
+            })
+        } else if (event.value === 'Falun') {
+            this.setState({toggleStockholm: false, toggleFalun: true, toggleÅre: false}, () => {
+                this.setState({data: this.state.falunData, selectedCity: 'Falun'});
+            })
+        } else if (event.value === 'Åre') {
+            this.setState({toggleStockholm: false, toggleFalun: false, toggleÅre: true}, () => {
+                this.setState({data: this.state.åreData, selectedCity: 'Åre'});
+            })
         } else {
-            let array = scheduleData.filter(sport => sport.city === event.value)
-            this.setState({ data: array })
+            this.setState({toggleStockholm: false, toggleFalun: false, toggleÅre: false}, () => {
+                this.setState({data: scheduleData, selectedCity: 'All cities'});
+            })
         }
-
-
-
+        if (this.state.toggleMedal) {
+            this.setState({toggleMedal: !this.state.toggleMedal}, () => {
+                this.toggleData();
+            })
+        }
     }
 
     render() {
-        const columns = [{
-            Header: 'Sport',
-            accessor: 'sport', width: 150
-        }, {
-            Header: '',
-            accessor: 'sport', width: 40,
-            Cell: row => this.generateSport(row.original.sport)
-        }, {
-            Header: 'City',
-            accessor: 'city', width: 150
-        }, {
-            Header: '7th',
-            accessor: 'day1',
-            Cell: row => this.generateSymbol(row.original.day1)
-        }, {
-            Header: '8th',
-            accessor: 'day2',
-            Cell: row => this.generateSymbol(row.original.day2)
-        }, {
-            Header: '9th',
-            accessor: 'day3',
-            Cell: row => this.generateSymbol(row.original.day3)
-        }, {
-            Header: '10th',
-            accessor: 'day4',
-            Cell: row => this.generateSymbol(row.original.day4)
-        }, {
-            Header: '11th',
-            accessor: 'day5',
-            Cell: row => this.generateSymbol(row.original.day5)
-        }, {
-            Header: '12th ',
-            accessor: 'day6',
-            Cell: row => this.generateSymbol(row.original.day6)
-        }, {
-            Header: '13th',
-            accessor: 'day7',
-            Cell: row => this.generateSymbol(row.original.day7)
-        }, {
-            Header: '14th',
-            accessor: 'day8',
-            Cell: row => this.generateSymbol(row.original.day8)
-        }, {
-            Header: '15th',
-            accessor: 'day9',
-            Cell: row => this.generateSymbol(row.original.day9)
-        }, {
-            Header: '16th',
-            accessor: 'day10',
-            Cell: row => this.generateSymbol(row.original.day10)
-        }, {
-            Header: '17th',
-            accessor: 'day11',
-            Cell: row => this.generateSymbol(row.original.day11)
-        }, {
-            Header: '18th',
-            accessor: 'day12',
-            Cell: row => this.generateSymbol(row.original.day12)
-        }, {
-            Header: '19th',
-            accessor: 'day13',
-            Cell: row => this.generateSymbol(row.original.day13)
-        }
-        ]
-
         return (
             <div>
-                <Dropdown options={this.state.options} onChange={this.onSelectCity} placeholder='Select city' className='schedule-table' />
-                <Toggle toggle={this.toggleMedals} />
-                <Toggle toggle={this.toggleMen} />
-                <Toggle toggle={this.toggleWomen} />
+                <div className='toggle-container'>
+                    <p className='toggle-text'>Medals only</p>
+                    <Toggle toggle={this.toggleData}/>
+
+                    <div className='dropdown-container'>
+                        <Dropdown options={this.state.options} onChange={this.onSelectCity}
+                                  placeholder={this.state.selectedCity} controlClassName={'dropdown'}
+                                  menuClassName={'dropdown-menu'}/>
+                    </div>
+                </div>
                 <ReactTable data={this.state.data} className='schedule-table'
-                    columns={columns}
-                    showPagination={false}
-                    sortable={false}
-                    pageSize={this.state.data.length} />
+                            columns={this.columns}
+                            showPagination={false}
+                            sortable={false}
+                            pageSize={this.state.data.length}/>
             </div>
         )
     }
