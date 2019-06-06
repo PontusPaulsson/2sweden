@@ -46,7 +46,7 @@ class OlympicSchedule extends Component {
         accessor: 'sport', width: 150
     }, {
         Header: '',
-        accessor: 'sport', width: 40,
+        accessor: 'icon', width: 40,
         Cell: row => this.generateSport(row.original.sport)
     }, {
         Header: 'City',
@@ -114,7 +114,7 @@ class OlympicSchedule extends Component {
 
     generateSport(sport) {
         if (sport === 'Alpine Skiing') {
-            return <div><img height={34} src={alpine}/></div>
+            return <div ><img height={34} src={alpine}/></div>
         } else if (sport === 'Ice Hockey') {
             return <div><img height={34} src={hockey}/></div>
         } else if (sport === 'Figure Skating') {
@@ -158,6 +158,12 @@ class OlympicSchedule extends Component {
         } else if (day === 'XO') {
             return <div><img className={'tooltip-on-hover'} height={34} src={genderSymbol}/>
                 <div className="tooltip">Men's/Women</div></div>
+        } else if (day === 'OC') {
+            return <div><img height={34} src={genderSymbol}/>
+                <div className="tooltip-cermony">Opening Ceremony</div></div>
+        } else if (day === 'CC') {
+            return <div><img height={34} src={genderSymbol}/>
+                <div className="tooltip-cermony">Closing Ceremony</div></div>
         } else {
             return ''
         }

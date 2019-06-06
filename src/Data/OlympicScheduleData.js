@@ -2,8 +2,8 @@ export const scheduleData = [
     {
         sport: 'Ceremonies',
         city: 'Stockholm',
-        day1: 'XO',
-        day13: 'XO'
+        day1: 'OC',
+        day13: 'CC'
     },
     {
         sport: 'Ice Hockey',
