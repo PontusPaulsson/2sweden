@@ -3,27 +3,34 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 import MapContainer from "./MapContainer";
 
-const resultColumns = [
-  {
-    Header: "Transport",
-    accessor: "transport" // String-based value accessors!
-  },
-  {
-    Header: "Time",
-    accessor: "time",
-    sortMethod: (a, b) => {
-      return Number(a.match(/(\d+)/g)[0]) - Number(b.match(/(\d+)/g)[0]);
-    }
-    // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
-  },
-  {
-    accessor: "price", // Required because our accessor is not a string
-    Header: "Price (SEK)"
-  },
-  {
-    accessor: "transfers", // Required because our accessor is not a string
-    Header: "Transfers"
+const resultColumns = [{
+  minWidth: 160,
+  Header: "Transport",
+  accessor: "transport" // String-based value accessors!
+},
+{
+  Header: "Time",
+  accessor: "time",
+  minWidth: 120,
+  maxWidth: 120,
+
+  sortMethod: (a, b) => {
+    return Number(a.match(/(\d+)/g)[0]) - Number(b.match(/(\d+)/g)[0]);
   }
+  // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
+},
+{
+  minWidth: 180,
+  maxWidth: 180,
+  accessor: "price", // Required because our accessor is not a string
+  Header: "Price (SEK)"
+},
+{
+  minWidth: 160,
+  maxWidth: 160,
+  accessor: "transfers", // Required because our accessor is not a string
+  Header: "Transfers"
+}
 ];
 
 const segmentColumns = [

@@ -249,7 +249,7 @@ class OlympicSchedule extends Component {
             })
         } else {
             this.setState({toggleStockholm: false, toggleFalun: false, toggleÅre: false}, () => {
-                this.setState({data: scheduleData, selectedCity: 'All cities'});
+                this.setState({data: scheduleData, selectedCity: 'All Cities'});
             })
         }
         if (this.state.toggleMedal) {
@@ -264,7 +264,7 @@ class OlympicSchedule extends Component {
             <div>
                 <div className='toggle-container'>
                     <p className='toggle-text'>Medals only</p>
-                    <Toggle toggle={this.toggleData}/>
+                    <Toggle toggle={this.toggleData} className='toggle-button'/>
                     <div className='dropdown-container'>
                         <Dropdown options={this.state.options} onChange={this.onSelectCity}
                                   placeholder={this.state.selectedCity} controlClassName={'dropdown'}

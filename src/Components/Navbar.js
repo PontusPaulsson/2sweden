@@ -9,7 +9,7 @@ class Navbar extends Component {
     return (
       <nav data-test="nav-bar-container">
         <ul className="nav-list">
-          <li className="nav-item">Search Transport</li>
+          <li className="nav-item" onClick={this.props.showHomescreen}>Search Transport</li>
           <li className="nav-item" onClick={this.props.showSchedule}>Olympic Schedule</li>
           <li className="nav-item">
             About the Locations

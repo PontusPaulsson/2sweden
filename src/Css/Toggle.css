@@ -1,16 +1,9 @@
 .switch {
     position: relative;
-    display: inline-block;
     width: 60px;
     height: 34px;
     outline: none;
-    margin-top: 30px;
-}
-
-.switch input {
-    position: absolute;
-    top: -99999px;
-    left: -99999px;
+    margin-top: 2.5vh;
 }
 
 .slider {
@@ -55,12 +48,13 @@ input:checked + .slider:before {
 
 .toggle-container {
     display: flex;
+    justify-content:center;
     box-shadow: 0 0 0 0.3vh black;
     background-color: #006699;
     color: #ffcc00;
     font-weight: bold;
     font-size: 3vh;
-    margin-bottom: 36px;
+    margin-bottom: 2vh;
 }
 .toggle-text {
     margin: 20px;
@@ -72,7 +66,6 @@ input:checked + .slider:before {
     border-radius: 1.5vh;
     box-shadow: 0 0 0 0.3vh black;
     border: 1px solid black;
-
 }
 
 .Dropdown-root > .dropdown-menu {

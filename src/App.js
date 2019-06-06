@@ -46,6 +46,10 @@ class App extends Component {
   showSchedule = () => {
     this.setState({ showSchedule: true });
   };
+  showHomescreen = () => {
+    this.setState({ showSchedule: false });
+    this.setState({ showResult: false });
+  };
 
   doSearch = (from, to) => {
     if (from) {
@@ -121,7 +125,7 @@ class App extends Component {
           <React.Fragment>
             <Title />
             <div className="mobile-sidebar-open">
-              <Navbar showSchedule={this.showSchedule} />
+              <Navbar showSchedule={this.showSchedule} showHomescreen={this.showHomescreen}/>
               <SearchTrip doSearch={this.doSearch} />
             </div>
             <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
@@ -134,14 +138,14 @@ class App extends Component {
         ) : this.state.showSchedule ? (
             <React.Fragment>
               <Title />
-              <Navbar />
+              <Navbar showHomescreen={this.showHomescreen}/>
               <OlympicSchedule />
             </React.Fragment>
 
         ) : (
               <React.Fragment>
                 <Title />
-                <Navbar showSchedule={this.showSchedule}  />
+                <Navbar showHomescreen={this.showHomescreen} showSchedule={this.showSchedule}   />
                 <Inspiration />
                 <Bamse />
               </React.Fragment>)}
