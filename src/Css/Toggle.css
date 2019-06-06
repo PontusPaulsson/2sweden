@@ -4,6 +4,7 @@
     width: 60px;
     height: 34px;
     outline: none;
+    margin-top: 30px;
 }
 
 .switch input {
@@ -62,7 +63,7 @@ input:checked + .slider:before {
     margin-bottom: 36px;
 }
 .toggle-text {
-    margin-top: 15px;
+    margin: 20px;
 }
 
 .Dropdown-root > .dropdown {
@@ -80,6 +81,7 @@ input:checked + .slider:before {
     border-radius: 1.5vh;
     box-shadow: 0 0 0 0.3vh black;
     border: 1px solid black;
+
 }
 
 .dropdown-menu > .Dropdown-option {
@@ -96,3 +98,9 @@ input:checked + .slider:before {
     box-shadow: 0 0 0 0.3vh black;
     border: 1px solid black;
 }
+
+.dropdown-container{
+    margin-top: 11px;
+    margin-left: 50px;
+}
+
