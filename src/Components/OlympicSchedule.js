@@ -140,17 +140,24 @@ class OlympicSchedule extends Component {
 
     generateSymbol(day) {
         if (day === 'X') {
-            return <div><img height={34} src={maleSymbol}/></div>
+            return <div><img className={'tooltip-on-hover'} height={34} src={maleSymbol}/>
+                <div className="tooltip">Men's match</div></div>
         } else if (day === 'O') {
-            return <div><img height={34} src={femaleSymbol}/></div>
+            return <div><img className={'tooltip-on-hover'}  height={34} src={femaleSymbol}/>
+                <div className="tooltip">Women match</div></div>
+
         } else if (day === 'MM') {
-            return <div><img height={34} src={goldMedals}/></div>
+            return <div><img className={'tooltip-on-hover'}  height={34} src={goldMedals}/>
+                <div className="tooltip">Men's/Women medal</div></div>
         } else if (day === 'XM') {
-            return <div><img height={34} src={goldMedalMen}/></div>
+            return <div><img className={'tooltip-on-hover'} height={34} src={goldMedalMen}/>
+                <div className="tooltip">Men's medal</div></div>
         } else if (day === 'OM') {
-            return <div><img height={34} src={goldMedalWomen}/></div>
+            return <div><img className={'tooltip-on-hover'} height={34} src={goldMedalWomen}/>
+                <div className="tooltip">Women medal</div></div>
         } else if (day === 'XO') {
-            return <div><img height={34} src={genderSymbol}/></div>
+            return <div><img className={'tooltip-on-hover'} height={34} src={genderSymbol}/>
+                <div className="tooltip">Men's/Women</div></div>
         } else {
             return ''
         }
@@ -252,7 +259,6 @@ class OlympicSchedule extends Component {
                 <div className='toggle-container'>
                     <p className='toggle-text'>Medals only</p>
                     <Toggle toggle={this.toggleData}/>
-
                     <div className='dropdown-container'>
                         <Dropdown options={this.state.options} onChange={this.onSelectCity}
                                   placeholder={this.state.selectedCity} controlClassName={'dropdown'}

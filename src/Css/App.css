@@ -191,3 +191,14 @@ body {
     left: -10%;
   }
 }
+.tooltip {
+  font-size: 15px;
+  color: black;
+  visibility: hidden;  /* Or display: none, depending on how you want it to behave */
+  text-shadow: 0vh 0 black, 0 0vh black, 0vh 0 black, 0 0vh black;
+
+}
+
+.tooltip-on-hover:hover + .tooltip {    /* Uses the adjacent sibling selector */
+  visibility: visible;  /* Or display: block */
+}
