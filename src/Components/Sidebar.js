@@ -3,7 +3,6 @@ import SearchTrip from "./SearchTrip";
 import Navbar from "./Navbar";
 import { Title } from "./Title";
 import "../Css/Sidebar.css";
-import Hej from "../img/hej.png";
 
 const sidebar = props => {
   // om sidebaren är öppen så påverkas/stylas både "sidebar" och "open" classerna. ena eller båda sparas i en sträng som jag anv i className
@@ -16,9 +15,11 @@ const sidebar = props => {
       <React.Fragment>
         <Title />
 
-        <Navbar />
+        <Navbar
+          showHomescreen={props.showHomescreen}
+          showSchedule={props.showSchedule}
+        />
         <SearchTrip doSearch={props.doSearch} />
-        <img className="hej" src={Hej} />
       </React.Fragment>
     </div>
   );

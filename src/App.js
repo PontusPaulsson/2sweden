@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   showSchedule = () => {
-    this.setState({ showSchedule: true });
+    this.setState({ showSchedule: true, showResult: false });
   };
   showHomescreen = () => {
     this.setState({ showSchedule: false });
@@ -125,30 +125,38 @@ class App extends Component {
           <React.Fragment>
             <Title />
             <div className="mobile-sidebar-open">
-              <Navbar showSchedule={this.showSchedule} showHomescreen={this.showHomescreen}/>
+              <Navbar
+                showSchedule={this.showSchedule}
+                showHomescreen={this.showHomescreen}
+              />
               <SearchTrip doSearch={this.doSearch} />
             </div>
             <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
             <Sidebar
+              showSchedule={this.showSchedule}
+              showHomescreen={this.showHomescreen}
               sidebarOpen={this.state.sidebarOpen}
               doSearch={this.doSearch}
             />
             {backdrop}
           </React.Fragment>
         ) : this.state.showSchedule ? (
-            <React.Fragment>
-              <Title />
-              <Navbar showHomescreen={this.showHomescreen}/>
-              <OlympicSchedule />
-            </React.Fragment>
-
+          <React.Fragment>
+            <Title />
+            <Navbar showHomescreen={this.showHomescreen} />
+            <OlympicSchedule />
+          </React.Fragment>
         ) : (
-              <React.Fragment>
-                <Title />
-                <Navbar showHomescreen={this.showHomescreen} showSchedule={this.showSchedule}   />
-                <Inspiration />
-                <Bamse />
-              </React.Fragment>)}
+          <React.Fragment>
+            <Title />
+            <Navbar
+              showHomescreen={this.showHomescreen}
+              showSchedule={this.showSchedule}
+            />
+            <Inspiration />
+            <Bamse />
+          </React.Fragment>
+        )}
         {this.state.showResult ? (
           <SearchResult
             routes={this.state.routes}
