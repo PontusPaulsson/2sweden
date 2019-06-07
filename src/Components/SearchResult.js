@@ -2,24 +2,35 @@ import React, { Component } from "react";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 import MapContainer from "./MapContainer";
-const resultColumns = [
-  {
-    Header: "Transport",
-    accessor: "transport" // String-based value accessors!
-  },
-  {
-    Header: "Time",
-    accessor: "time"
-    // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
-  },
-  {
-    accessor: "price", // Required because our accessor is not a string
-    Header: "Price (SEK)"
-  },
-  {
-    accessor: "transfers", // Required because our accessor is not a string
-    Header: "Transfers"
+
+const resultColumns = [{
+  minWidth: 160,
+  Header: "Transport",
+  accessor: "transport" // String-based value accessors!
+},
+{
+  Header: "Time",
+  accessor: "time",
+  minWidth: 120,
+  maxWidth: 120,
+
+  sortMethod: (a, b) => {
+    return Number(a.match(/(\d+)/g)[0]) - Number(b.match(/(\d+)/g)[0]);
   }
+  // Cell: props => <span className="number">{props.value}</span> // Custom cell components!
+},
+{
+  minWidth: 180,
+  maxWidth: 180,
+  accessor: "price", // Required because our accessor is not a string
+  Header: "Price (SEK)"
+},
+{
+  minWidth: 160,
+  maxWidth: 160,
+  accessor: "transfers", // Required because our accessor is not a string
+  Header: "Transfers"
+}
 ];
 
 const segmentColumns = [
@@ -54,7 +65,8 @@ export default class SearchResult extends Component {
       rowEdit: false,
       selectedRowIndex: 0,
       test: true,
-      rowClicked: false
+      rowClicked: false,
+      expanded: {}
     };
   }
 
@@ -167,30 +179,56 @@ export default class SearchResult extends Component {
       return {};
     }
   };
-
+  expandRow(row) {
+    var expanded = { ...this.state.expanded };
+    if (expanded[row.viewIndex]) {
+      expanded = false;
+    } else {
+      expanded = true;
+    }
+    this.setState({
+      expanded: { [row.viewIndex]: expanded }
+    });
+  }
   render() {
     return (
       <div className="result-container">
-        <div className="result-table-container">
-          <ReactTable
-            className="result-table"
-            data={this.props.tableData}
-            columns={resultColumns}
-            showPagination={false}
-            defaultPageSize={this.props.routes.length}
-            getTrProps={this.onRowClick}
-          />
-
-          {this.state.segmentTableToggle ? (
-            <ReactTable
-              className="result-table"
-              data={this.state.segmentData}
-              showPagination={false}
-              columns={segmentColumns}
-              pageSize={this.state.segmentTableLength}
-            />
-          ) : null}
-        </div>
+        <ReactTable
+          className="result-table"
+          data={this.props.tableData}
+          columns={resultColumns}
+          showPagination={false}
+          defaultPageSize={this.props.routes.length}
+          getTrProps={this.onRowClick}
+          expanded={this.state.expanded}
+          getTdProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                this.expandRow(rowInfo);
+              }
+            };
+          }}
+          getTheadThProps={(state, rowInfo, column, instance) => {
+            return {
+              onClick: e => {
+                instance.sortColumn(column);
+                this.setState({ expanded: false });
+              }
+            };
+          }}
+          SubComponent={row => {
+            return (
+              <ReactTable
+                className="result-subtable"
+                data={this.state.segmentData}
+                showPagination={false}
+                columns={segmentColumns}
+                pageSize={this.state.segmentTableLength}
+                sortable={false}
+              />
+            );
+          }}
+        />
         <div className="map">
           <MapContainer
             segmentData={this.state.segmentData}

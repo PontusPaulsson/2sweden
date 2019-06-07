@@ -1,0 +1,47 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffcc00;
+  height: 80px;
+}
+
+.toolbar-navigation {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+}
+
+.toolbar span {
+  margin-left: 1rem;
+  color: #006699;
+  font-weight: bold;
+  font-family: Raleway;
+  font-size: 4vh;
+}
+
+.spacer {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .toolbar-items {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  .toolbar {
+    display: none;
+  }
+
+  .toolbar-button {
+    display: none;
+  }
+
+  .toolbar-menu {
+    margin-left: 0;
+  }
+}

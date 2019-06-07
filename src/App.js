@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import "./Css/App.css";
+import "./Css/Schedule.css";
 import "./Css/SearchTrip.css";
 import "./Css/SearchResult.css";
 import "./Css/MediaQueries.css";
+import "./Css/Toolbar.css";
+import "./Css/Toggle.css";
 import { Title } from "./Components/Title";
-import { Navbar } from "./Components/Navbar";
+import Navbar from "./Components/Navbar";
 import { Inspiration } from "./Components/Inspiration";
+import { Bamse } from "./Components/Bamse";
 import SearchTrip from "./Components/SearchTrip";
 import SearchResult from "./Components/SearchResult";
+import OlympicSchedule from "./Components/OlympicSchedule";
+import Toolbar from "./Components/Toolbar";
+import Sidebar from "./Components/Sidebar";
+import Backdrop from "./Components/Backdrop";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const base = `http://free.rome2rio.com/api/1.4/json/`;
@@ -21,7 +29,9 @@ class App extends Component {
       places: [],
       tableData: [],
       showResult: false,
-      currencyCode: ""
+      currencyCode: "",
+      showSchedule: false,
+      sidebarOpen: false
     };
   }
 
@@ -31,6 +41,14 @@ class App extends Component {
       .then(data => {
         this.setState({ currencyCode: data.geoplugin_currencyCode });
       });
+  };
+
+  showSchedule = () => {
+    this.setState({ showSchedule: true, showResult: false });
+  };
+  showHomescreen = () => {
+    this.setState({ showSchedule: false });
+    this.setState({ showResult: false });
   };
 
   doSearch = (from, to) => {
@@ -54,6 +72,9 @@ class App extends Component {
           console.log(error);
           this.setState({ showResult: false });
         });
+
+      // när vi klickar på search-knappen stängs sidebaren
+      this.setState({ sidebarOpen: false });
     }
   };
 
@@ -81,15 +102,60 @@ class App extends Component {
     this.setState({ tableData: newData });
   };
 
+  // denna funktion öppnar sidebaren när man klickar på menu-knappen
+  sidebarClickHandler = () => {
+    this.setState({ sidebarOpen: true });
+  };
+
+  // denna funktion stänger sidebaren när man klickar på backdropen
+  backdropClickHandler = () => {
+    this.setState({ sidebarOpen: false });
+  };
+
   render() {
+    // detta rendrar backdropen när sidebaren är öppen (true)
+    let backdrop;
+    if (this.state.sidebarOpen) {
+      backdrop = <Backdrop click={this.backdropClickHandler} />;
+    }
+
     return (
       <div className="App">
-        <Title />
-        <Navbar />
         {this.state.showResult ? (
-          <SearchTrip doSearch={this.doSearch} />
+          <React.Fragment>
+            <Title />
+            <div className="mobile-sidebar-open">
+              <Navbar
+                showSchedule={this.showSchedule}
+                showHomescreen={this.showHomescreen}
+              />
+              <SearchTrip doSearch={this.doSearch} />
+            </div>
+            <Toolbar sidebarClickHandler={this.sidebarClickHandler} />
+            <Sidebar
+              showSchedule={this.showSchedule}
+              showHomescreen={this.showHomescreen}
+              sidebarOpen={this.state.sidebarOpen}
+              doSearch={this.doSearch}
+            />
+            {backdrop}
+          </React.Fragment>
+        ) : this.state.showSchedule ? (
+          <React.Fragment>
+            <Title />
+            <Navbar showHomescreen={this.showHomescreen} />
+            <OlympicSchedule />
+          </React.Fragment>
         ) : (
-          <Inspiration />
+          <React.Fragment>
+            <Title />
+            <Navbar
+              showHomescreen={this.showHomescreen}
+              showSchedule={this.showSchedule}
+            />
+            <Inspiration />
+            <Bamse />
+          </React.Fragment>
         )}
         {this.state.showResult ? (
           <SearchResult
@@ -98,7 +164,7 @@ class App extends Component {
             places={this.state.places}
             tableData={this.state.tableData}
           />
-        ) : (
+        ) : this.state.showSchedule ? null : (
           <SearchTrip doSearch={this.doSearch} />
         )}
       </div>

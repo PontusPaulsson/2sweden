@@ -7,7 +7,7 @@ body {
   background-color: #ffcc00;
   text-shadow: -0.3vh 0 black, 0 0.3vh black, 0.3vh 0 black, 0 -0.3vh black;
   font-family: Lato;
-  width: 100%;
+  width: 100vw;
 }
 .Stockholm {
   width: 32.5%;
@@ -82,14 +82,13 @@ body {
   transform: scale(1.1);
 }
 .header-container {
-  padding-top: 2vh;
   display: flex;
   justify-content: center;
   color: #006699;
   font-weight: bold;
   font-family: Raleway;
   margin: 0;
-  font-size: 11vh;
+  font-size: 10vh;
 }
 .title-container {
   display: flex;
@@ -99,24 +98,58 @@ body {
   margin-left: 1.5vw;
   margin-right: 1.5vw;
 }
+.bamse-head {
+  height: 30vh;
+  transition: all 1.5s;
+}
+.bamse-container {
+  position: fixed;
+  bottom: -24vh;
+  height: 30vh;
+  width: 30vh;
+  left: 86.5%;
+}
+.bamse-container:hover .bamse-head {
+  transform: translateY(-22.5vh);
+}
+.bamse-container:hover .bamse-right {
+  animation: walk-right infinite 20s linear;
+}
+.bamse-container:hover .bamse-left {
+  animation: walk-left infinite 20s linear;
+}
+.bamse-right {
+  position: fixed;
+  bottom: 0;
+  left: -100%;
+  height: 25vh;
+}
+.bamse-left {
+  position: fixed;
+  bottom: 0;
+  left: 350%;
+  transform: rotateY(180deg);
+  height: 25vh;
+}
+
 .logo {
   animation: spin infinite 15s linear;
   margin-right: 0.2vw;
-  max-width: 8vh;
-  max-height: 8vh;
+  max-width: 7vh;
+  max-height: 7vh;
   border-radius: 100%;
   box-shadow: 0 0 0 0.3vh black;
 }
 .desktop-logo {
   margin-right: 0.2vw;
-  max-width: 15vh;
-  max-height: 15vh;
+  max-width: 12vh;
+  max-height: 12vh;
   border-radius: 1.5vh;
   box-shadow: 0 0 0 0.3vh black;
   margin-left: 2vw;
 }
 .os-rings {
-  height: 15vh;
+  height: 12vh;
   margin-right: 2vw;
 }
 .os-rings:hover {
@@ -141,4 +174,38 @@ body {
     height: 170%;
     width: 100%;
   }
+}
+@keyframes walk-right {
+  0% {
+    left: -30%;
+  }
+  100% {
+    left: 230%;
+  }
+}
+@keyframes walk-left {
+  0% {
+    left: 250%;
+  }
+  100% {
+    left: -10%;
+  }
+}
+.tooltip {
+  font-size: 15px;
+  color: black;
+  visibility: hidden;  /* Or display: none, depending on how you want it to behave */
+  text-shadow: 0vh 0 black, 0 0vh black, 0vh 0 black, 0 0vh black;
+
+}
+
+.tooltip-on-hover:hover + .tooltip {    /* Uses the adjacent sibling selector */
+  visibility: visible;  /* Or display: block */
+}
+
+.tooltip-cermony{
+  font-size: 15px;
+  color: black;
+  text-shadow: 0vh 0 black, 0 0vh black, 0vh 0 black, 0 0vh black;
+
 }
