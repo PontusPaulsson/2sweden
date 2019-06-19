@@ -1,0 +1,29 @@
+
+Feedback from Kenneth Österholm
+2019-06-19
+
+= = CSS = =
+Good use of Flexbox
+Good use of media queries
+Good use of key-frame animations
+Good use of css-names
+
+= = HTML = =
+The use of semantics elements could be better 
+like 'aside' instead of anonymous div's
+
+= = React = =
+Good use of functional components
+Good use of react fragments
+
+
+= = General = =
+Good placing credentials in .env-file 
+and ignore together with .gitignore
+
+Good choice of project structure
+
+Many complexed features has been created with 
+clean and advanced JavaScript. 
+
+Good job !!
